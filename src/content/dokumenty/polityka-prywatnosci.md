@@ -1,13 +1,12 @@
 ---
 title: "Polityka prywatności"
-description: "Polityka prywatności Proxima Legal: administrator, cele i podstawy przetwarzania, formularz kontaktowy, logi serwera, odbiorcy, transfer do USA i prawa osób."
+description: "Polityka prywatności Proxima Legal: administrator, cele i podstawy przetwarzania, formularz kontaktowy, logi serwera, odbiorcy danych i prawa osób."
 updated: 2026-11-12
 order: 1
 verify:
   - "Uzupełnić dane administratora: forma prawna, pełna nazwa, adres siedziby, NIP, REGON, KRS, adres do korespondencji."
-  - "Netlify, Inc. figuruje na liście EU-U.S. Data Privacy Framework (dataprivacyframework.gov, odczyt 12.11.2026): status aktywny dla EU-U.S. DPF, UK Extension i Swiss-U.S. DPF, dane inne niż kadrowe (Non-HR), data pierwotnej certyfikacji 13.02.2020, termin ponownej certyfikacji 17.12.2026. Po tej dacie sprawdzić status ponownie oraz to, czy decyzja wykonawcza Komisji (UE) 2023/1795 nadal obowiązuje."
-  - "Potwierdzić, że administrator zawarł z Netlify umowę powierzenia przetwarzania (DPA, art. 28 RODO) i czy Netlify występuje wyłącznie jako podmiot przetwarzający; sprawdzić listę podprocesorów Netlify, w tym ewentualny zewnętrzny filtr spamu w Netlify Forms."
-  - "Uzupełnić okres przechowywania logów serwera przez Netlify oraz okres przechowywania zgłoszeń w panelu Netlify Forms."
+  - "Potwierdzić, że administrator zawarł z dostawcą hostingu i dostawcą poczty umowy powierzenia przetwarzania (art. 28 RODO) i że hosting Strony jest w Europejskim Obszarze Gospodarczym (§ 10 ust. 1 zakłada brak transferu w związku z hostingiem)."
+  - "Sprawdzić u dostawcy hostingu, jak długo przechowuje logi serwera, i w razie potrzeby wpisać konkretny okres w § 8 ust. 1."
   - "Uzupełnić dostawcę poczty e-mail i ustalić, czy przekazuje dane poza EOG; jeśli tak, dopisać podstawę transferu w § 10."
   - "Potwierdzić okresy przechowywania z § 8 (propozycja 12 miesięcy dla korespondencji bez umowy) i to, czy administrator wyznaczył inspektora ochrony danych."
   - "Potwierdzić rodzaj tajemnicy zawodowej: adwokacka (art. 6 i art. 16a ustawy Prawo o adwokaturze, Dz.U. 2024 poz. 1564 ze zm.) albo radcowska (art. 3 ust. 3-6 i art. 5a ustawy o radcach prawnych, Dz.U. 2024 poz. 499 ze zm.) i usunąć niewłaściwy wariant."
@@ -46,7 +45,7 @@ verify:
 
 ## § 5. Formularz kontaktowy
 
-1. Formularz kontaktowy jest obsługiwany przez usługę Netlify Forms dostarczaną przez Netlify, Inc. Dane wysłane przez formularz są zapisywane w panelu usługi i przekazywane na skrzynkę kontakt@proximalegal.pl.
+1. Dane wysłane przez formularz kontaktowy są przekazywane przez serwer Strony wiadomością e-mail na skrzynkę kontakt@proximalegal.pl. Strona nie zapisuje zgłoszeń w bazie danych ani w plikach na serwerze.
 2. Formularz służy wyłącznie do nawiązania kontaktu. Administrator prosi, aby przez formularz nie przesyłać:
    1. danych szczególnych kategorii, o których mowa w art. 9 ust. 1 RODO, w tym danych o zdrowiu,
    2. danych dotyczących wyroków skazujących i naruszeń prawa (art. 10 RODO),
@@ -56,18 +55,18 @@ verify:
 
 ## § 6. Logi serwera
 
-1. Logi są zapisywane automatycznie przez infrastrukturę dostawcy hostingu, Netlify, Inc., przy każdym żądaniu skierowanym do Strony.
+1. Logi są zapisywane automatycznie przez serwer dostawcy hostingu przy każdym żądaniu skierowanym do Strony.
 2. Administrator nie łączy danych z logów z danymi z formularza ani z innymi źródłami w celu identyfikacji osób odwiedzających Stronę. Z logów korzysta się w razie incydentu bezpieczeństwa lub błędu technicznego.
 
 ## § 7. Korespondencja e-mail
 
-1. Wiadomości kierowane na adres kontakt@proximalegal.pl oraz zgłoszenia z formularza są przechowywane w systemie poczty elektronicznej dostarczanym przez {{dostawca-poczty}}.
+1. Wiadomości kierowane na adres kontakt@proximalegal.pl oraz zgłoszenia z formularza są przechowywane w systemie poczty elektronicznej obsługującym tę skrzynkę{{dostawca-poczty-opis}}.
 2. Do przetwarzania danych z korespondencji stosuje się cele i podstawy określone w § 4 ust. 2-4.
 
 ## § 8. Okres przechowywania danych
 
-1. Logi serwera są przechowywane przez okres wynikający z zasad świadczenia usługi hostingu przez Netlify, Inc., a w razie incydentu bezpieczeństwa do czasu jego wyjaśnienia.
-2. Zgłoszenia zapisane w panelu Netlify Forms są usuwane po przekazaniu ich na skrzynkę Administratora, nie później niż po 30 dniach.
+1. Logi serwera są przechowywane przez okres wynikający z zasad świadczenia usługi hostingu, a w razie incydentu bezpieczeństwa do czasu jego wyjaśnienia.
+2. Strona nie przechowuje zgłoszeń z formularza. Po wysłaniu trafiają one wyłącznie na skrzynkę Administratora i podlegają zasadom z ust. 3-5.
 3. Dane z formularza i korespondencji, która nie doprowadziła do zawarcia umowy, są przechowywane przez czas prowadzenia korespondencji, a następnie przez 12 miesięcy od ostatniego kontaktu.
 4. Jeżeli dane są niezbędne do ustalenia, dochodzenia lub obrony roszczeń, okres przechowywania może ulec przedłużeniu do upływu terminu przedawnienia tych roszczeń.
 5. Jeżeli dojdzie do zawarcia umowy o świadczenie pomocy prawnej, okresy przechowywania określa informacja przekazywana klientowi przy zawarciu umowy.
@@ -75,18 +74,16 @@ verify:
 ## § 9. Odbiorcy danych
 
 1. Dane mogą być przekazywane podmiotom przetwarzającym je na zlecenie Administratora (art. 28 RODO):
-   1. Netlify, Inc., San Francisco, USA, w zakresie hostingu Strony, logów serwera i obsługi formularza,
+   1. {{hosting}}, w zakresie utrzymania Strony, logów serwera i wysyłki wiadomości z formularza,
    2. {{dostawca-poczty}}, w zakresie obsługi poczty elektronicznej.
 2. Partnerzy współpracujący z Administratorem przy prowadzeniu spraw, w szczególności biuro rachunkowe, doradca podatkowy, doradca restrukturyzacyjny i notariusz, otrzymują dane wyłącznie za zgodą klienta i w zakresie niezbędnym do prowadzenia sprawy.
 3. Dane mogą być udostępniane organom publicznym, jeżeli obowiązek ten wynika z przepisów prawa, z poszanowaniem tajemnicy zawodowej.
 
 ## § 10. Przekazywanie danych do państw trzecich
 
-1. Netlify, Inc. ma siedzibę w Stanach Zjednoczonych, co oznacza przekazywanie danych z logów i formularza do państwa trzeciego.
-2. Podstawą przekazania jest decyzja wykonawcza Komisji (UE) 2023/1795 z dnia 10 lipca 2023 r. stwierdzająca odpowiedni stopień ochrony danych osobowych w ramach Ramowego porozumienia o ochronie danych UE-USA (EU-U.S. Data Privacy Framework), wydana na podstawie art. 45 RODO.
-3. Netlify, Inc. figuruje w wykazie uczestników EU-U.S. Data Privacy Framework prowadzonym przez Departament Handlu USA (dataprivacyframework.gov) jako aktywny uczestnik w zakresie danych innych niż dane kadrowe.
-4. {{transfer-poczty}}
-5. Informację o zabezpieczeniach stosowanych przy przekazywaniu danych można uzyskać, kontaktując się z Administratorem w sposób wskazany w § 2.
+1. Strona jest utrzymywana na serwerach dostawcy hostingu na terytorium Europejskiego Obszaru Gospodarczego. W związku z hostingiem, logami serwera i obsługą formularza dane nie są przekazywane do państw trzecich.
+2. {{transfer-poczty}}
+3. Informację o zabezpieczeniach stosowanych przy przekazywaniu danych można uzyskać, kontaktując się z Administratorem w sposób wskazany w § 2.
 
 ## § 11. Prawa osoby, której dane dotyczą
 

@@ -6,7 +6,7 @@ order: 2
 verify:
   - "Numer artykułu zweryfikowany: art. 399 ustawy z dnia 12 lipca 2024 r. Prawo komunikacji elektronicznej (Dz.U. 2024 poz. 1221, w życiu od 10.11.2024), tekst pierwotny z API Sejmu; tekstu jednolitego brak, zmiany Dz.U. 2025 poz. 637 i 820 oraz 2026 poz. 252, 815 i 1296 nie dotyczą art. 399 (sprawdzone 12.11.2026)."
   - "Po każdym wdrożeniu sprawdzić w narzędziach deweloperskich przeglądarki (zakładki Application lub Storage), że strona nie zapisuje cookies, localStorage, sessionStorage ani IndexedDB, w tym na stronie po wysłaniu formularza."
-  - "Potwierdzić, że w Netlify nie są włączone funkcje zapisujące informacje w przeglądarce (np. split testing, Netlify Identity, ochrona strony hasłem)."
+  - "Potwierdzić, że w panelu hostingu nie są włączone funkcje zapisujące informacje w przeglądarce (np. ochrona katalogu hasłem, statystyki z cookies, baner hostingu)."
   - "Jeżeli kancelaria wdroży analitykę, zaktualizować § 3, dodać listę cookies (nazwa, dostawca, cel, okres) i baner zgód przed publikacją zmiany."
 ---
 

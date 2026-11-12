@@ -52,10 +52,9 @@ export function tokens(k = loadKancelaria()) {
   else iod = `Administrator wyznaczył inspektora ochrony danych, z którym można kontaktować się pod adresem ${k.inspektorOchronyDanych}.`;
 
   let transfer;
-  if (!k.dostawcaPoczty) transfer = miss('czy dostawca poczty przekazuje dane poza EOG i na jakiej podstawie');
-  else if (!k.podstawaTransferuPoczty) transfer = miss('podstawa przekazania danych przez dostawcę poczty poza EOG albo informacja, że dane są w EOG');
-  else if (/^eog$/i.test(k.podstawaTransferuPoczty)) transfer = 'Dostawca poczty e-mail przechowuje dane na terytorium Europejskiego Obszaru Gospodarczego.';
-  else transfer = `Jeżeli dostawca poczty e-mail przekazuje dane poza Europejski Obszar Gospodarczy, podstawą przekazania jest ${k.podstawaTransferuPoczty}.`;
+  if (k.podstawaTransferuPoczty && /^eog$/i.test(k.podstawaTransferuPoczty)) transfer = 'Dostawca poczty e-mail przechowuje dane na terytorium Europejskiego Obszaru Gospodarczego.';
+  else if (k.podstawaTransferuPoczty) transfer = `Dostawca poczty e-mail może przekazywać dane poza Europejski Obszar Gospodarczy. Podstawą przekazania jest ${k.podstawaTransferuPoczty}.`;
+  else transfer = 'Jeżeli dostawca poczty e-mail przekazuje dane poza Europejski Obszar Gospodarczy, następuje to na podstawie decyzji Komisji stwierdzającej odpowiedni stopień ochrony (art. 45 RODO) albo standardowych klauzul umownych (art. 46 ust. 2 lit. c RODO).';
 
   return {
     'nazwa': nazwa,
@@ -67,7 +66,9 @@ export function tokens(k = loadKancelaria()) {
     'rejestr': rejestr,
     'telefon': k.telefon ?? miss('telefon'),
     'email': k.email,
-    'dostawca-poczty': k.dostawcaPoczty ?? miss('dostawca poczty e-mail'),
+    'dostawca-poczty': k.dostawcaPoczty ?? 'dostawca usług poczty elektronicznej',
+    'dostawca-poczty-opis': k.dostawcaPoczty ? `, dostarczanym przez ${k.dostawcaPoczty}` : '',
+    'hosting': k.dostawcaHostingu ?? 'dostawca usług hostingu Strony',
     'transfer-poczty': transfer,
     'iod': iod,
     'tytul': k.tytulZawodowy ?? miss('tytuł zawodowy: adwokat albo radca prawny'),
@@ -94,8 +95,6 @@ export function missingFields(k = loadKancelaria()) {
     telefon: 'telefon',
     tytulZawodowy: 'tytuł zawodowy: "adwokat" albo "radca prawny"',
     numerWpisu: 'numer wpisu na listę adwokatów albo radców prawnych',
-    dostawcaPoczty: 'dostawca poczty e-mail (np. nazwa firmy hostingu poczty)',
-    podstawaTransferuPoczty: 'podstawa transferu danych poczty poza EOG albo "EOG"',
     inspektorOchronyDanych: 'inspektor ochrony danych: adres e-mail albo "nie"',
   };
   return Object.entries(labels).filter(([key]) => k[key] === null || k[key] === undefined || k[key] === '').map(([key, label]) => ({ key, label }));

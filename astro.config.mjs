@@ -17,7 +17,7 @@ export default defineConfig({
   },
   security: {
     // Astro liczy hashe inline'owych <script>/<style> i wstrzykuje meta CSP na każdej stronie.
-    // Nagłówki HTTP (HSTS, frame-ancestors itd.) są w netlify.toml.
+    // Nagłówki HTTP (HSTS, X-Frame-Options itd.) są w public/.htaccess.
     csp: {
       directives: [
         "default-src 'self'",

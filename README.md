@@ -50,9 +50,16 @@ Stare adresy prototypu (`/#abonament`, `/#rescue`, `/#faq` itd.) przekierowuje s
 4. **Zdjęcia**: portret licencjonowanego doradcy restrukturyzacyjnego (ten sam kadr i światło co portret na `/legal-rescue/`, podpięcie w `src/pages/legal-rescue.astro`, zmienna `advisorPhoto`), opcjonalnie zdjęcia partnerów. Jeśli obecne portrety Kingi Adamus są generowane, przed publikacją zamienić je na prawdziwą sesję: na stronie kancelarii zdjęcie przedstawia konkretną osobę.
 5. **Cena sesji strategicznej**: `strategy.session.price` w `src/data/offer.ts` (dziś "Wycena po konsultacji").
 
-## Hosting: Netlify
+## Hosting: dowolny zwykły hosting z PHP (np. lh.pl)
 
-`netlify.toml` jest gotowy: build, nagłówki bezpieczeństwa (HSTS, nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy), cache, przekierowania. Formularz kontaktowy działa przez **Netlify Forms** (bez backendu): po pierwszym wdrożeniu w panelu Netlify włącz powiadomienia e-mail na `kontakt@proximalegal.pl` (Forms, Form notifications). CSP jest w `<meta>` każdej strony, Astro liczy hashe skryptów. Strona nie ustawia cookies i nie ładuje nic z zewnętrznych serwerów (fonty serwowane lokalnie).
+`npm run build` tworzy w `dist/` gotowe pliki. Wgrywasz całą zawartość `dist/` (razem z ukrytym `.htaccess`) do katalogu domeny przez FTP. Nie potrzeba Node.js na serwerze ani żadnej platformy typu Netlify czy Vercel.
+
+- `public/.htaccess` (Apache): HTTPS, przekierowanie z www, nagłówki bezpieczeństwa (HSTS, nosniff, X-Frame-Options, Referrer-Policy, Permissions-Policy), cache, kompresja, strona 404, krótkie adresy.
+- `public/formularz.php`: formularz kontaktowy. Wysyła wiadomość na `kontakt@proximalegal.pl` funkcją `mail()` hostingu, nic nie zapisuje, nie ustawia cookies. Ma pułapki na boty (ukryte pole i minimalny czas wypełnienia) i zabezpieczenie przed wstrzykiwaniem nagłówków. Wymaga PHP 7.4+ i skrzynki/aliasu `formularz@proximalegal.pl` (nadawca w domenie, żeby przechodził SPF). Pilne zgłoszenia mają w temacie `[PILNE]`.
+- CSP jest w `<meta>` każdej strony, Astro liczy hashe skryptów. Strona nie ładuje nic z zewnętrznych serwerów (fonty lokalnie).
+- Polityka prywatności zakłada hosting w Europejskim Obszarze Gospodarczym (§ 10). Przy hostingu poza EOG trzeba ją zmienić.
+
+Podgląd lokalny: `npm run build` i `npm run preview`, potem http://localhost:4321 (formularz PHP lokalnie nie wysyła poczty).
 
 ## SEO i widoczność w AI: co jest wdrożone
 
@@ -67,5 +74,5 @@ Stare adresy prototypu (`/#abonament`, `/#rescue`, `/#faq` itd.) przekierowuje s
 
 1. Google Search Console i Bing Webmaster Tools: dodać domenę, zgłosić `https://proximalegal.pl/sitemap-index.xml`.
 2. Profil firmy w Google (Warszawa), gdy będzie adres biura.
-3. Pomiar AI: raz w miesiącu 20 zapytań w ChatGPT, Perplexity, Gemini i AI Mode (np. "utracona korzyść art. 361 kc", "ile ma zarząd na wniosek o upadłość") i zapis, czy strona jest cytowana. Logi Netlify filtrować po OAI-SearchBot, PerplexityBot, Googlebot.
+3. Pomiar AI: raz w miesiącu 20 zapytań w ChatGPT, Perplexity, Gemini i AI Mode (np. "utracona korzyść art. 361 kc", "ile ma zarząd na wniosek o upadłość") i zapis, czy strona jest cytowana. Logi serwera (panel hostingu) filtrować po OAI-SearchBot, PerplexityBot, Googlebot.
 4. Analityka: jeśli kancelaria jej chce, dopiero z banerem zgody i aktualizacją `/legal/polityka-cookies/`.

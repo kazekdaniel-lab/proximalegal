@@ -140,8 +140,8 @@ Slugi /legal:
 Frontmatter: `title`, `description`, `updated`, `order` (liczba), `verify` (lista). Treść w paragrafach (`## § 1. Postanowienia ogólne`), ustępy numerowane (`1.`, `2.`). Dane nieznane wpisujesz jako `[DO UZUPEŁNIENIA: pełna nazwa kancelarii]`. Slugi: `polityka-prywatnosci`, `polityka-cookies`, `regulamin`, `nota-prawna`.
 
 Fakty techniczne strony (prawdziwe na dzień wdrożenia, opieraj się tylko na nich):
-- Strona statyczna, hosting Netlify, Inc. (USA). Serwer zapisuje standardowe logi (adres IP, data i godzina, adres URL, user agent) do celów bezpieczeństwa i diagnostyki.
-- Formularz kontaktowy obsługuje Netlify Forms. Pola: imię i nazwisko, e-mail lub telefon, treść wiadomości, zaznaczenie "Sprawa pilna: spółka traci płynność". Zgłoszenia trafiają na skrzynkę kontakt@proximalegal.pl. Dostawca poczty: [DO UZUPEŁNIENIA].
+- Strona statyczna na zwykłym hostingu w EOG (np. lh.pl). Serwer zapisuje standardowe logi (adres IP, data i godzina, adres URL, user agent) do celów bezpieczeństwa i diagnostyki.
+- Formularz kontaktowy obsługuje skrypt `formularz.php` na serwerze strony: wysyła wiadomość e-mailem na kontakt@proximalegal.pl i niczego nie zapisuje. Pola: imię i nazwisko, e-mail lub telefon, treść wiadomości, zaznaczenie "Sprawa pilna: spółka traci płynność".
 - Strona NIE używa plików cookies ani localStorage, nie ma narzędzi analitycznych, pikseli reklamowych, osadzonych map, filmów ani wtyczek mediów społecznościowych. Fonty są serwowane z serwera strony (bez Google Fonts).
 - Strona udostępnia kanał RSS z artykułami.
 - Administrator: Proxima Legal, [DO UZUPEŁNIENIA: forma prawna, adres siedziby, NIP, REGON, KRS]. Kontakt: kontakt@proximalegal.pl. Biuro w Warszawie, adres [DO UZUPEŁNIENIA].

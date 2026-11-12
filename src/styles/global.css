@@ -758,6 +758,7 @@ p { text-wrap: pretty; }
 .check strong { display: block; font-weight: 600; }
 .check span { font-size: .875rem; color: var(--text-muted); }
 .form__consent { font-size: .875rem; color: var(--text-muted); }
+.form__error { padding: 14px 16px; border-radius: var(--r-ctl); background: color-mix(in srgb, var(--peach) 22%, transparent); border: 1px solid var(--rust); color: var(--rust); font-weight: 600; font-size: .9375rem; }
 .form .btn { justify-self: start; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .contact-info { display: grid; gap: 0; border-top: 1px solid var(--rule); }

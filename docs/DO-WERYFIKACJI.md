@@ -3,7 +3,7 @@
 Wygenerowano: 2026-11-12 skryptem `scripts/verify-report.mjs`. Nie edytuj ręcznie, popraw źródło i uruchom skrypt ponownie.
 
 Każdy tekst merytoryczny napisano na podstawie aktualnych tekstów jednolitych ustaw (API Sejmu). Przed publikacją prawnik prowadzący musi przeczytać tekst i odhaczyć punkty poniżej.
-Punktów do sprawdzenia: 156.
+Punktów do sprawdzenia: 153.
 
 
 ## Dane kancelarii (src/data/kancelaria.json)
@@ -19,8 +19,6 @@ Wpisz brakujące wartości w jednym pliku. Strona, stopka, dokumenty i dane dla 
 - [ ] `telefon`: telefon
 - [ ] `tytulZawodowy`: tytuł zawodowy: "adwokat" albo "radca prawny"
 - [ ] `numerWpisu`: numer wpisu na listę adwokatów albo radców prawnych
-- [ ] `dostawcaPoczty`: dostawca poczty e-mail (np. nazwa firmy hostingu poczty)
-- [ ] `podstawaTransferuPoczty`: podstawa transferu danych poczty poza EOG albo "EOG"
 - [ ] `inspektorOchronyDanych`: inspektor ochrony danych: adres e-mail albo "nie"
 
 ## Baza wiedzy
@@ -246,7 +244,7 @@ Adres: `/legal/polityka-cookies/`  Plik: `src/content/dokumenty/polityka-cookies
 
 - [ ] Numer artykułu zweryfikowany: art. 399 ustawy z dnia 12 lipca 2024 r. Prawo komunikacji elektronicznej (Dz.U. 2024 poz. 1221, w życiu od 10.11.2024), tekst pierwotny z API Sejmu; tekstu jednolitego brak, zmiany Dz.U. 2025 poz. 637 i 820 oraz 2026 poz. 252, 815 i 1296 nie dotyczą art. 399 (sprawdzone 12.11.2026).
 - [ ] Po każdym wdrożeniu sprawdzić w narzędziach deweloperskich przeglądarki (zakładki Application lub Storage), że strona nie zapisuje cookies, localStorage, sessionStorage ani IndexedDB, w tym na stronie po wysłaniu formularza.
-- [ ] Potwierdzić, że w Netlify nie są włączone funkcje zapisujące informacje w przeglądarce (np. split testing, Netlify Identity, ochrona strony hasłem).
+- [ ] Potwierdzić, że w panelu hostingu nie są włączone funkcje zapisujące informacje w przeglądarce (np. ochrona katalogu hasłem, statystyki z cookies, baner hostingu).
 - [ ] Jeżeli kancelaria wdroży analitykę, zaktualizować § 3, dodać listę cookies (nazwa, dostawca, cel, okres) i baner zgód przed publikacją zmiany.
 
 ### Polityka prywatności
@@ -254,9 +252,8 @@ Adres: `/legal/polityka-cookies/`  Plik: `src/content/dokumenty/polityka-cookies
 Adres: `/legal/polityka-prywatnosci/`  Plik: `src/content/dokumenty/polityka-prywatnosci.md`
 
 - [ ] Uzupełnić dane administratora: forma prawna, pełna nazwa, adres siedziby, NIP, REGON, KRS, adres do korespondencji.
-- [ ] Netlify, Inc. figuruje na liście EU-U.S. Data Privacy Framework (dataprivacyframework.gov, odczyt 12.11.2026): status aktywny dla EU-U.S. DPF, UK Extension i Swiss-U.S. DPF, dane inne niż kadrowe (Non-HR), data pierwotnej certyfikacji 13.02.2020, termin ponownej certyfikacji 17.12.2026. Po tej dacie sprawdzić status ponownie oraz to, czy decyzja wykonawcza Komisji (UE) 2023/1795 nadal obowiązuje.
-- [ ] Potwierdzić, że administrator zawarł z Netlify umowę powierzenia przetwarzania (DPA, art. 28 RODO) i czy Netlify występuje wyłącznie jako podmiot przetwarzający; sprawdzić listę podprocesorów Netlify, w tym ewentualny zewnętrzny filtr spamu w Netlify Forms.
-- [ ] Uzupełnić okres przechowywania logów serwera przez Netlify oraz okres przechowywania zgłoszeń w panelu Netlify Forms.
+- [ ] Potwierdzić, że administrator zawarł z dostawcą hostingu i dostawcą poczty umowy powierzenia przetwarzania (art. 28 RODO) i że hosting Strony jest w Europejskim Obszarze Gospodarczym (§ 10 ust. 1 zakłada brak transferu w związku z hostingiem).
+- [ ] Sprawdzić u dostawcy hostingu, jak długo przechowuje logi serwera, i w razie potrzeby wpisać konkretny okres w § 8 ust. 1.
 - [ ] Uzupełnić dostawcę poczty e-mail i ustalić, czy przekazuje dane poza EOG; jeśli tak, dopisać podstawę transferu w § 10.
 - [ ] Potwierdzić okresy przechowywania z § 8 (propozycja 12 miesięcy dla korespondencji bez umowy) i to, czy administrator wyznaczył inspektora ochrony danych.
 - [ ] Potwierdzić rodzaj tajemnicy zawodowej: adwokacka (art. 6 i art. 16a ustawy Prawo o adwokaturze, Dz.U. 2024 poz. 1564 ze zm.) albo radcowska (art. 3 ust. 3-6 i art. 5a ustawy o radcach prawnych, Dz.U. 2024 poz. 499 ze zm.) i usunąć niewłaściwy wariant.

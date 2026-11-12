@@ -1,0 +1,65 @@
+# proximalegal.pl: konfiguracja serwera Apache (zwykły hosting, np. lh.pl).
+# CSP jest w <meta> każdej strony (Astro liczy hashe skryptów), tu reszta nagłówków.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+AddDefaultCharset utf-8
+AddType text/plain;charset=utf-8 .txt
+AddType application/xml;charset=utf-8 .xml
+AddType image/avif .avif
+AddType image/webp .webp
+AddType font/woff2 .woff2
+
+<Files ".ht*">
+  Require all denied
+</Files>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # www -> bez www
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # skróty i stare nazwy
+  RewriteRule ^polityka-prywatnosci/?$ /legal/polityka-prywatnosci/ [L,R=301]
+  RewriteRule ^regulamin/?$ /legal/regulamin/ [L,R=301]
+  RewriteRule ^rescue/?$ /legal-rescue/ [L,R=301]
+  RewriteRule ^abonament/?$ /abonament-prawny/ [L,R=301]
+  RewriteRule ^wiedza/?$ /baza-wiedzy/ [L,R=301]
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [L,R=301]
+
+  # katalog bez ukośnika na końcu -> z ukośnikiem (jeden kanoniczny adres)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+[^/])$ /$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # pliki z hashem w nazwie (Astro) można trzymać w cache rok
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <If "%{REQUEST_URI} =~ m#^/og/#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>

@@ -34,8 +34,9 @@ const contactLd = {
 
   <section class="section" aria-label="Formularz i dane kontaktowe">
     <div class="container contact">
-      <form class="form" name="kontakt" method="POST" action="/kontakt/dziekujemy/" data-netlify="true" netlify-honeypot="firma-www" data-validate>
-        <input type="hidden" name="form-name" value="kontakt" />
+      <form class="form" name="kontakt" method="POST" action="/formularz.php" data-validate>
+        <p class="form__error" role="alert" data-form-error hidden></p>
+        <input type="hidden" name="t" value="0" data-form-time />
         <p class="hp" aria-hidden="true"><label>Nie wypełniaj: <input name="firma-www" tabindex="-1" autocomplete="off" /></label></p>
         <div class="field">
           <label for="f-name">Imię i nazwisko</label>
@@ -86,6 +87,18 @@ const contactLd = {
   const urgent = document.getElementById('f-urgent') as HTMLInputElement | null;
   const msg = document.getElementById('f-msg') as HTMLTextAreaElement | null;
   if (params.get('temat') === 'pilne' && urgent) urgent.checked = true;
+  // znacznik czasu dla pułapki na boty w formularz.php
+  const t = document.querySelector<HTMLInputElement>('[data-form-time]');
+  if (t) t.value = String(Date.now());
+  // komunikat po nieudanej wysyłce (formularz.php wraca z ?blad=...)
+  const err = document.querySelector<HTMLElement>('[data-form-error]');
+  const blad = params.get('blad');
+  if (err && blad) {
+    err.textContent = blad === 'braki'
+      ? 'Uzupełnij imię i nazwisko, kontakt oraz opis sprawy i wyślij ponownie.'
+      : 'Nie udało się wysłać wiadomości. Napisz bezpośrednio na kontakt@proximalegal.pl.';
+    err.hidden = false;
+  }
   const names: Record<string, string> = { 'legal-starter': 'Legal Starter', 'legal-finanse': 'Legal + Finanse', 'legal-strategia': 'Legal + Strategia', 'all-in-one': 'All-in-One' };
   const p = params.get('pakiet');
   if (msg && !msg.value) {

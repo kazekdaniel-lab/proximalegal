@@ -63,7 +63,9 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
   // opóźnienia kaskadowe ustawiane przez CSSOM (zgodne z CSP)
   document.querySelectorAll<HTMLElement>('.axis').forEach((axis) => {
     axis.querySelectorAll<HTMLElement>('.axis__days span').forEach((s, i) => (s.style.transitionDelay = `${900 + i * 28}ms`));
-    axis.querySelectorAll<HTMLElement>('.axis__text').forEach((t, i) => (t.style.transitionDelay = `${250 + i * 160}ms`));
+    axis.querySelectorAll<HTMLElement>('.axis__seg').forEach((seg, i) =>
+      seg.querySelectorAll<HTMLElement>('.axis__text').forEach((t) => (t.style.transitionDelay = `${200 + i * 120}ms`))
+    );
     axis.querySelectorAll<HTMLElement>('.axis__ticks').forEach((t, i) => {
       const before = t; // pseudo-element dziedziczy opóźnienie przez zmienną
       before.style.setProperty('--d', `${i * 160}ms`);

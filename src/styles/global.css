@@ -314,6 +314,38 @@ p { text-wrap: pretty; }
   .page-hero__media img { aspect-ratio: 4 / 5; }
 }
 
+/* hero ze zdjęciem (strona główna) */
+.hero--photo { padding-top: 0; }
+.hero__top { display: grid; gap: 32px; }
+.hero__copy { padding-top: clamp(40px, 6vw, 72px); }
+.hero__copy .hero__lead { margin-top: 24px; }
+.hero__copy .hero__actions { margin-top: 32px; }
+.hero__media { position: relative; margin: 0; }
+.hero__media picture { display: block; height: 100%; }
+.hero__media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 25%; border-radius: var(--r-panel); }
+.hero__media::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 30%; background: linear-gradient(to top, var(--ink), transparent); pointer-events: none; }
+@media (max-width: 999px) {
+  /* telefon i tablet: zdjęcie na górze, od krawędzi do krawędzi, potem tekst */
+  .hero__media { order: -1; margin-inline: calc(-1 * var(--gutter)); }
+  .hero__media img { aspect-ratio: 5 / 4; border-radius: 0; object-position: 50% 22%; }
+  .hero__copy { padding-top: 8px; }
+}
+@media (min-width: 640px) and (max-width: 999px) { .hero__media img { aspect-ratio: 16 / 10; } }
+.hero__caption { position: absolute; left: 14px; bottom: 14px; z-index: 2; display: grid; gap: 2px; padding: 10px 14px; border-radius: 6px; background: color-mix(in srgb, var(--ink) 80%, transparent); }
+.hero__caption strong { font-family: var(--serif); font-size: 1.125rem; font-weight: 560; line-height: 1.2; }
+.hero__caption span { font-size: .875rem; color: var(--on-dark-muted); }
+@media (min-width: 1000px) {
+  .hero__top { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 48px; min-height: min(780px, calc(100vh - var(--header-h) - 24px)); }
+  .hero__copy { align-self: center; padding-block: 64px; }
+  .hero--photo .display.hero__title { font-size: clamp(2.75rem, 1.2rem + 3.3vw, 4.625rem); max-width: 20ch; }
+  .hero--photo .hero__actions { justify-self: start; }
+  .hero__media { margin-right: calc((100vw - min(var(--container), 100vw - 2 * var(--gutter))) / -2); }
+  .hero__media img { height: 100%; aspect-ratio: auto; border-radius: 0; }
+  .hero__media::after { display: none; }
+  .hero__media::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to right, var(--ink) 0%, transparent 24%), linear-gradient(to top, var(--ink) 0%, transparent 18%); }
+  .hero__caption { left: 40px; bottom: 36px; }
+}
+
 /* 9. Oś życia spółki (element sygnaturowy) ------------------------------------------ */
 .axis { margin-top: clamp(48px, 6vw, 88px); }
 .axis__caption { display: flex; justify-content: space-between; gap: 16px; font-size: .875rem; color: var(--on-dark-muted); margin-bottom: 14px; }
@@ -643,6 +675,7 @@ p { text-wrap: pretty; }
 .duo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--r-panel); }
 .photo-slot { aspect-ratio: 3 / 4; border-radius: var(--r-panel); border: 1px dashed var(--rule-strong); display: grid; place-items: center; text-align: center; padding: 20px; font-size: .875rem; color: var(--text-muted); background: repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--rule) 45%, transparent) 10px 11px); }
 .duo figcaption { grid-column: 1 / -1; font-size: .875rem; color: var(--text-muted); }
+.duo img.duo__face { object-position: 72% 30%; }
 .duo__note { align-self: end; border-top: 2px solid var(--rust); padding-top: 16px; }
 .duo__note p:last-child { color: var(--text-muted); font-size: .9375rem; margin-top: 8px; }
 

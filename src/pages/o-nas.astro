@@ -7,6 +7,7 @@ import { partners, workflow } from '../data/offer';
 import { site } from '../data/site';
 import portrait from '../assets/img/kinga-adamus-dokumenty.jpg';
 import office from '../assets/img/biuro-warszawa.jpg';
+import desk from '../assets/img/kinga-adamus-biurko.jpg';
 
 const crumbs = [{ name: 'O nas', href: '/o-nas/' }];
 // Proste ikony ról (linie 1,5 px), rysowane w SVG, bez zewnętrznych bibliotek.
@@ -102,7 +103,7 @@ const icons: Record<string, string> = {
     </div>
   </section>
 
-  <CtaBand />
+  <CtaBand image={desk} imageAlt="Kinga Adamus przy biurku z laptopem" />
 </Base>
 
 <style>

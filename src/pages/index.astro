@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import LifeAxis from '../components/LifeAxis.astro';
@@ -11,6 +11,8 @@ import { homeFacts, startSteps, oneTeam, rescue } from '../data/offer';
 import { firstParagraphs } from '../lib/text';
 import { formatPrice } from '../data/site';
 import kinga from '../assets/img/kinga-adamus-biurko.jpg';
+import heroImg from '../assets/img/kinga-adamus-hero.jpg';
+import ctaImg from '../assets/img/kinga-adamus-dokumenty.jpg';
 
 const bw = await getCollection('baza-wiedzy');
 const featured = ['odpowiedzialnosc-zarzadu-art-299-ksh', 'jak-zalozyc-spolke-z-oo', 'bledy-w-umowach-b2b']
@@ -35,18 +37,22 @@ const faqHome = {
   description="Kancelaria dla spółek: rejestracja, rundy i M&A, bieżąca obsługa w stałym ryczałcie oraz Legal Rescue dla spółek w kryzysie. Bezpłatna konsultacja 30 min."
   jsonLd={[faqHome]}
 >
-  <section class="hero dark" aria-labelledby="hero-title">
+  <section class="hero hero--photo dark" aria-labelledby="hero-title">
     <div class="container">
-      <div class="hero__grid">
-        <div class="hero__title-wrap">
+      <div class="hero__top">
+        <div class="hero__copy">
           <p class="kicker">Kancelaria dla spółek, Warszawa i online</p>
           <h1 id="hero-title" class="display hero__title">Prawo, które nadąża za Twoim biznesem.</h1>
+          <p class="lead hero__lead">Od rejestracji spółki po trudne decyzje. Jeden zespół poznaje Twoją firmę raz i prowadzi ją przez kolejne etapy, w stałym abonamencie albo w trybie kryzysowym.</p>
+          <div class="btn-row hero__actions">
+            <a class="btn btn--primary" href="/kontakt/">Bezpłatna konsultacja 30 min</a>
+            <a class="btn btn--ghost" href="/abonament-prawny/">Zobacz ofertę</a>
+          </div>
         </div>
-        <p class="lead hero__lead">Od rejestracji spółki po trudne decyzje. Jeden zespół poznaje Twoją firmę raz i prowadzi ją przez kolejne etapy, w stałym abonamencie albo w trybie kryzysowym.</p>
-        <div class="btn-row hero__actions">
-          <a class="btn btn--primary" href="/kontakt/">Bezpłatna konsultacja 30 min</a>
-          <a class="btn btn--ghost" href="/abonament-prawny/">Zobacz ofertę</a>
-        </div>
+        <figure class="hero__media">
+          <Picture src={heroImg} alt="Kinga Adamus, założycielka Proxima Legal, przy stole konferencyjnym w biurze w Warszawie" widths={[480, 640, 840]} sizes="(min-width: 1000px) 50vw, 100vw" formats={['avif', 'webp']} loading="eager" fetchpriority="high" />
+          <figcaption class="hero__caption"><strong>Kinga Adamus</strong><span>założycielka, prawo gospodarcze</span></figcaption>
+        </figure>
       </div>
       <LifeAxis />
       <dl class="facts">
@@ -225,5 +231,5 @@ const faqHome = {
     </section>
   )}
 
-  <CtaBand />
+  <CtaBand image={ctaImg} imageAlt="Kinga Adamus czyta umowę przy biurku" />
 </Base>

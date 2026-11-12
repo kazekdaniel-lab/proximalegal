@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { formatPrice } from '../data/site';
 import { rescue } from '../data/offer';
-import portrait from '../assets/img/kinga-adamus-studio.jpg';
+import portrait from '../assets/img/kinga-adamus-dokumenty.jpg';
 // Portret doradcy restrukturyzacyjnego: wstaw import zdjęcia, gdy będzie gotowe (ten sam kadr i światło co portret obok).
 const advisorPhoto: ImageMetadata | null = null;
 
@@ -104,7 +104,7 @@ const service = {
         </ol>
       </div>
       <figure class="duo">
-        <Image src={portrait} alt="Kinga Adamus, założycielka Proxima Legal" widths={[320, 480, 640]} sizes="(min-width: 1000px) 20vw, 50vw" format="webp" loading="lazy" />
+        <Image src={portrait} alt="Kinga Adamus analizuje dokumenty spółki" widths={[320, 480, 640]} sizes="(min-width: 1000px) 20vw, 50vw" format="webp" loading="lazy" class="duo__face" />
         {advisorPhoto ? <Image src={advisorPhoto} alt="Licencjonowany doradca restrukturyzacyjny" widths={[320, 480, 640]} sizes="(min-width: 1000px) 20vw, 50vw" format="webp" loading="lazy" /> : (
           <div class="duo__note">
             <p class="h3">Prawnik i doradca restrukturyzacyjny</p>

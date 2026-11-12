@@ -1,0 +1,32 @@
+---
+import Logo from './Logo.astro';
+import { footerNav, legalNav } from '../data/nav';
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer dark">
+  <div class="container">
+    <div class="site-footer__top">
+      <div>
+        <a class="brand" href="/" aria-label="Proxima Legal, strona główna"><Logo /><span class="brand__name">Proxima <span>Legal</span></span></a>
+        <p>Kancelaria dla spółek na każdym etapie: od rejestracji, przez wzrost, po trudne decyzje.</p>
+        <a class="site-footer__mail" href={`mailto:${site.email}`}>{site.email}</a>
+        {site.phone && <p><a class="link" href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></p>}
+        <p>Biuro: {site.address.street ? `${site.address.street}, ${site.address.postalCode} ` : ''}Warszawa. Spotkania w biurze lub online.</p>
+      </div>
+      {footerNav.map((g) => (
+        <div>
+          <h2>{g.label}</h2>
+          <ul>{g.items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+        </div>
+      ))}
+    </div>
+    <div class="site-footer__bottom">
+      <span>
+        &copy; {year} {site.legalName ?? site.name}
+        {site.nip ? <> &nbsp;NIP {site.nip}</> : <> &nbsp;<span class="placeholder">NIP do uzupełnienia</span></>}
+      </span>
+      <ul>{legalNav.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+    </div>
+  </div>
+</footer>

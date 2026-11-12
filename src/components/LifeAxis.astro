@@ -1,0 +1,31 @@
+---
+// Oś życia spółki: element sygnaturowy (DESIGN.md, pkt 5.1)
+import { specializations } from '../data/specializations';
+interface Props { caption?: boolean }
+const { caption = true } = Astro.props;
+const days = Array.from({ length: 30 }, (_, i) => i + 1);
+---
+<div class="axis" aria-labelledby="axis-label">
+  {caption && (
+    <div class="axis__caption">
+      <span id="axis-label">Etapy życia spółki</span>
+      <span aria-hidden="true">30 dni na decyzję w kryzysie</span>
+    </div>
+  )}
+  {!caption && <span id="axis-label" class="visually-hidden">Etapy życia spółki</span>}
+  <ol class="axis__list" role="list">
+    {specializations.map((s) => (
+      <li class:list={['axis__seg', { 'axis__seg--rescue': s.tone === 'rescue' }]}>
+        <a href={`/specjalizacje/${s.slug}/`}>
+          {s.tone === 'rescue'
+            ? <span class="axis__days" aria-hidden="true">{days.map(() => <span></span>)}</span>
+            : <span class="axis__ticks" aria-hidden="true"></span>}
+          <span class="axis__no axis__text">{s.no}</span>
+          <span class="axis__stage axis__text">{s.stage}</span>
+          <span class="axis__title axis__text">{s.title}</span>
+          <span class="axis__short axis__text">{s.short}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</div>

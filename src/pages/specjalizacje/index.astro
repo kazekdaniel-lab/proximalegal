@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LifeAxis from '../../components/LifeAxis.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { specializations } from '../../data/specializations';
+
+const crumbs = [{ name: 'Specjalizacje', href: '/specjalizacje/' }];
+const list = {
+  '@type': 'ItemList',
+  name: 'Specjalizacje Proxima Legal',
+  itemListElement: specializations.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.title, url: `https://proximalegal.pl/specjalizacje/${s.slug}/` })),
+};
+---
+<Base
+  title="Specjalizacje kancelarii dla spółek"
+  description="Cztery etapy życia spółki: start i rejestracja, finansowanie i M&A, bieżąca obsługa oraz kryzys i restrukturyzacja. Jedna kancelaria na każdy etap."
+  breadcrumbs={crumbs}
+  pageType="CollectionPage"
+  jsonLd={[list]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">Specjalizacje</p>
+      <h1 id="page-title" class="h1 page-hero__title">Cztery etapy, jedna kancelaria</h1>
+      <p class="lead page-hero__lead">Spółka przechodzi przez podobne momenty: start, finansowanie, codzienną pracę i czasem kryzys. Każdy z nich wymaga innej wiedzy, a my znamy firmę już z poprzedniego etapu.</p>
+      <LifeAxis caption={false} />
+    </div>
+  </section>
+
+  <section class="section" aria-label="Zakres specjalizacji">
+    <div class="container">
+      {specializations.map((s, i) => (
+        <article class:list={['split', { 'mt-l': i > 0 }]} aria-labelledby={`s-${s.slug}`}>
+          <div class="split__head">
+            <Image src={s.image} alt={s.imageAlt} widths={[400, 640, 900]} sizes="(min-width: 960px) 30vw, 100vw" format="webp" loading={i === 0 ? 'eager' : 'lazy'} class="spec-photo" />
+          </div>
+          <div>
+            <p class:list={['kicker', { 'kicker--rescue': s.tone === 'rescue' }]}>{s.no} {s.stage}</p>
+            <h2 id={`s-${s.slug}`} class="h2">{s.title}</h2>
+            <p class="lead mt-s">{s.short}</p>
+            <ul class="checklist mt-m" role="list">{s.bullets.map((b) => <li>{b}</li>)}</ul>
+            <p class="mt-m"><a class:list={['btn', s.tone === 'rescue' ? 'btn--rescue' : 'btn--ghost']} href={`/specjalizacje/${s.slug}/`}>Zakres usług: {s.title}</a></p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .spec-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r-panel); }
+  .split + .split { padding-top: 56px; border-top: 1px solid var(--rule); }
+</style>

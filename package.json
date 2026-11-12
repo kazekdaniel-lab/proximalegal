@@ -1,0 +1,24 @@
+{
+  "name": "proximalegal",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "rm -rf .astro node_modules/.astro && astro build && node scripts/check-dist.mjs && node scripts/verify-report.mjs",
+    "preview": "astro preview",
+    "og": "node scripts/generate-og.mjs",
+    "check:dashes": "node scripts/check-dashes.mjs"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource-variable/source-serif-4": "^5.3.1",
+    "astro": "^6.4.8",
+    "sharp": "^0.35.5"
+  }
+}

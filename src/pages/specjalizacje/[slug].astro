@@ -1,0 +1,121 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { specializations, type Specialization } from '../../data/specializations';
+
+export function getStaticPaths() {
+  return specializations.map((s) => ({ params: { slug: s.slug }, props: { spec: s } }));
+}
+interface Props { spec: Specialization }
+const { spec: s } = Astro.props;
+const isRescue = s.tone === 'rescue';
+const crumbs = [
+  { name: 'Specjalizacje', href: '/specjalizacje/' },
+  { name: s.title, href: `/specjalizacje/${s.slug}/` },
+];
+const bw = await getCollection('baza-wiedzy');
+const articles = s.articles.map((id) => bw.find((a) => a.id === id)).filter((a): a is NonNullable<typeof a> => Boolean(a));
+const others = specializations.filter((o) => o.slug !== s.slug);
+
+const service = {
+  '@type': 'Service',
+  '@id': `https://proximalegal.pl/specjalizacje/${s.slug}/#usluga`,
+  name: s.title,
+  description: s.lead,
+  provider: { '@id': 'https://proximalegal.pl/#kancelaria' },
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `Zakres: ${s.title}`,
+    itemListElement: s.services.map((x) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: x.t, description: x.d } })),
+  },
+};
+---
+<Base title={s.metaTitle} description={s.metaDescription} breadcrumbs={crumbs} jsonLd={[service]}>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <div class="page-hero__grid page-hero__grid--media">
+        <div>
+          <p class:list={['kicker', { 'kicker--rescue': isRescue }]}>Specjalizacja {s.no}, {s.stage}</p>
+          <h1 id="page-title" class="h1 page-hero__title">{s.hero}</h1>
+          <p class="lead page-hero__lead">{s.lead}</p>
+          <div class="btn-row page-hero__actions">
+            <a class:list={['btn', isRescue ? 'btn--rescue' : 'btn--primary']} href={s.primaryCta.href}>{s.primaryCta.label}</a>
+            <a class="btn btn--ghost" href="/abonament-prawny/">Pakiety</a>
+          </div>
+        </div>
+        <div class="page-hero__media">
+          <Image src={s.image} alt={s.imageAlt} widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="scope-title">
+    <div class="container split">
+      <div class="split__head"><div class="sticky">
+        <p class="kicker">Zakres</p>
+        <h2 id="scope-title" class="h2">Co robimy w tym obszarze</h2>
+        <p class="muted mt-m">Dostępne w</p>
+        <ul class="pill-list mt-s" role="list">{s.packages.map((p) => <li><a href={p.href}>{p.label}</a></li>)}</ul>
+      </div></div>
+      <ul class="services" role="list">
+        {s.services.map((x) => <li><h3 class="h3">{x.t}</h3><p>{x.d}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="sit-title">
+    <div class="container split">
+      <div class="split__head">
+        <p class="kicker">Typowe sytuacje</p>
+        <h2 id="sit-title" class="h2">Z czym przychodzą klienci</h2>
+      </div>
+      <ul class="situations" role="list">{s.situations.map((t) => <li>{t}</li>)}</ul>
+    </div>
+  </section>
+
+  {isRescue && (
+    <section class="section" aria-labelledby="rescue-title">
+      <div class="container">
+        <div class="aside-note aside-note--rescue">
+          <div>
+            <h2 id="rescue-title" class="h3">Termin na decyzję już biegnie?</h2>
+            <p>Legal Rescue to stały tryb pracy na czas kryzysu: diagnoza, plan i prowadzenie postępowania w jednym ryczałcie.</p>
+          </div>
+          <a class="btn btn--rescue" href="/legal-rescue/">Legal Rescue</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {articles.length > 0 && (
+    <section class="section" aria-labelledby="kb-title">
+      <div class="container">
+        <div class="section-head section-head--split">
+          <div><p class="kicker mt-0">Z bazy wiedzy</p><h2 id="kb-title" class="h2">Przeczytaj, zanim zadzwonisz</h2></div>
+          <a class="link" href="/baza-wiedzy/">Baza wiedzy</a>
+        </div>
+        <ul class="cards cards--3" role="list">
+          {articles.map((a) => <li><ArticleCard href={`/baza-wiedzy/${a.id}/`} title={a.data.title} lead={a.data.lead} category={a.data.category} minutes={a.data.readingTime} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section" aria-labelledby="other-title">
+    <div class="container">
+      <h2 id="other-title" class="h4 muted mb-s">Pozostałe specjalizacje</h2>
+      <ul class="other-specs" role="list">
+        {others.map((o) => <li><a href={`/specjalizacje/${o.slug}/`}><span>{o.no} {o.stage}</span><strong>{o.title}</strong></a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand variant={isRescue ? 'rescue' : 'default'} />
+</Base>

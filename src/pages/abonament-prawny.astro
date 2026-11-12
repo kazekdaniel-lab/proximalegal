@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { packages, comparison, packageRules } from '../data/offer';
+
+const crumbs = [{ name: 'Abonament prawny', href: '/abonament-prawny/' }];
+const service = {
+  '@type': 'Service',
+  '@id': 'https://proximalegal.pl/abonament-prawny/#usluga',
+  name: 'Abonament prawny dla spółek',
+  serviceType: 'Stała obsługa prawna spółki w ryczałcie miesięcznym',
+  provider: { '@id': 'https://proximalegal.pl/#kancelaria' },
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  description: 'Stały prawnik prowadzący, ryczałt miesięczny z pulą godzin i cztery pakiety: Legal Starter, Legal + Finanse, Legal + Strategia, All-in-One.',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Pakiety abonamentu prawnego',
+    itemListElement: packages.map((p) => ({
+      '@type': 'Offer',
+      name: p.name,
+      description: `${p.claim} Dla kogo: ${p.forWhom}. Zakres: ${p.features.join(', ')}.`,
+      url: `https://proximalegal.pl/abonament-prawny/#${p.id}`,
+      priceSpecification: { '@type': 'PriceSpecification', priceCurrency: 'PLN', description: 'Wycena po konsultacji' },
+    })),
+  },
+};
+const cell = (v: boolean | string) => (v === true ? 'yes' : v === false ? 'no' : 'text');
+---
+<Base
+  title="Abonament prawny dla spółek: 4 pakiety"
+  description="Stały prawnik, ryczałt miesięczny i pula godzin znana z góry. Cztery pakiety: samo prawo, z księgowością, z doradcą strategicznym albo wszystko razem."
+  breadcrumbs={crumbs}
+  jsonLd={[service]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">Oferta, abonament prawny</p>
+      <h1 id="page-title" class="h1 page-hero__title">Cztery pakiety. Jeden punkt kontaktu.</h1>
+      <p class="lead page-hero__lead">Płacisz stały ryczałt miesięczny i wiesz z góry, ile kosztuje godzina ponad pulę. Pakiet zmieniasz raz na kwartał, a gdy firma rośnie szybciej, wcześniej.</p>
+      <div class="btn-row page-hero__actions">
+        <a class="btn btn--primary" href="/kontakt/">Dobierz pakiet na konsultacji</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="pk-title">
+    <div class="container">
+      <h2 id="pk-title" class="visually-hidden">Pakiety</h2>
+      <ul class="packages" role="list">
+        {packages.map((p) => (
+          <li class:list={['package', { 'package--featured': p.featured }]} id={p.id}>
+            {p.featured && <span class="package__flag">Najczęściej wybierany</span>}
+            <span class="package__kicker">{p.kicker}</span>
+            <h3 class="h3">{p.name}</h3>
+            <p class="package__claim">{p.claim}</p>
+            <ul class="checklist" role="list">{p.features.map((f) => <li>{f}</li>)}</ul>
+            <p class="package__for"><strong>Dla kogo:</strong> {p.forWhom}</p>
+            <p class="package__price">Wycena po konsultacji</p>
+            <a class:list={['btn', p.featured ? 'btn--primary on-dark' : 'btn--ghost']} href={`/kontakt/?pakiet=${p.id}`}>Wybierz pakiet</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cmp-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker mt-0">Porównanie</p>
+        <h2 id="cmp-title" class="h2">Co zawiera każdy pakiet</h2>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cmp-title">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Zakres</th>
+              {packages.map((p) => <th scope="col" class:list={{ 'col-featured': p.featured }}>{p.name}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {row.values.map((v, i) => (
+                  <td class:list={{ 'col-featured': packages[i].featured }}>
+                    {cell(v) === 'yes' ? <><span class="yes" aria-hidden="true"></span><span class="visually-hidden">tak</span></>
+                      : cell(v) === 'no' ? <><span class="no" aria-hidden="true"></span><span class="visually-hidden">nie</span></>
+                      : v}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="rules-grid">
+        {packageRules.map((r) => <div><h3 class="h4">{r.t}</h3><p>{r.d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="other-title">
+    <div class="container">
+      <div class="aside-note aside-note--rescue">
+        <div>
+          <p class="kicker">Inna sytuacja</p>
+          <h2 id="other-title" class="h3">Spółka traci płynność albo ma zaległości wobec wierzycieli?</h2>
+          <p>Abonament jest dla firm, które działają. Na kryzys mamy osobny tryb z doradcą restrukturyzacyjnym.</p>
+        </div>
+        <a class="btn btn--rescue" href="/legal-rescue/">Legal Rescue</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Nie wiesz, który pakiet pasuje?" text="Na bezpłatnej konsultacji dobierzemy zakres do skali firmy. Propozycję z ceną dostaniesz na piśmie." />
+</Base>

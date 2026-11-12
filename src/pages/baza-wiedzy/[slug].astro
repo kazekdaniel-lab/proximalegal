@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { acts, sourceHref, formatDate, formatMonth, site } from '../../data/site';
+import { articleLd, faqLd } from '../../lib/ld';
+import { wordCount } from '../../lib/text';
+import avatar from '../../assets/img/kinga-adamus-avatar.jpg';
+
+export async function getStaticPaths() {
+  const all = await getCollection('baza-wiedzy');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+interface Props { entry: CollectionEntry<'baza-wiedzy'> }
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
+const url = `${site.url}/baza-wiedzy/${entry.id}/`;
+const isCrisis = d.category === 'Kryzys i restrukturyzacja';
+const all = await getCollection('baza-wiedzy');
+let related = d.related.map((id) => all.find((a) => a.id === id)).filter((a): a is NonNullable<typeof a> => Boolean(a));
+if (related.length < 3) {
+  const extra = all.filter((a) => a.id !== entry.id && a.data.category === d.category && !related.includes(a));
+  related = [...related, ...extra].slice(0, 3);
+}
+const crumbs = [
+  { name: 'Baza wiedzy', href: '/baza-wiedzy/' },
+  { name: d.title, href: `/baza-wiedzy/${entry.id}/` },
+];
+const ld = [
+  articleLd({ url, title: d.title, description: d.description, published: d.published, updated: d.updated, section: d.category, keywords: d.keywords, sources: d.sources, wordCount: wordCount(entry.body ?? ''), image: '/og/wiedza.png' }),
+  ...(d.faq.length ? [faqLd(url, d.faq)] : []),
+];
+---
+<Base title={d.title} description={d.description} type="article" image="/og/wiedza.png" breadcrumbs={crumbs} published={d.published} modified={d.updated} jsonLd={ld}>
+  <article>
+    <header class="article-head">
+      <div class="container">
+        <Breadcrumbs items={crumbs} />
+        <p class:list={['kicker', { 'kicker--rescue': isCrisis }]}><a class="link" href={`/baza-wiedzy/?kategoria=${encodeURIComponent(d.category)}`}>{d.category}</a></p>
+        <h1 class="h1">{d.title}</h1>
+        <p class="lead">{d.lead}</p>
+        <dl class="article-meta">
+          <div><dt>Autorka</dt><dd><a href="/o-nas/">{d.author}</a></dd></div>
+          <div><dt>Czas czytania</dt><dd>{d.readingTime} min</dd></div>
+          <div><dt>Stan prawny</dt><dd><time datetime={d.legalState.toISOString().slice(0, 10)}>{formatMonth(d.legalState)}</time></dd></div>
+          <div><dt>Aktualizacja</dt><dd><time datetime={d.updated.toISOString().slice(0, 10)}>{formatDate(d.updated)}</time></dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="container article-layout">
+      <div>
+        {d.summary.length > 0 && (
+          <section class="summary-box" aria-labelledby="w-skrocie">
+            <h2 id="w-skrocie">W skrócie</h2>
+            <ul>{d.summary.map((s) => <li>{s}</li>)}</ul>
+          </section>
+        )}
+        <div class="prose"><Content /></div>
+
+        {d.faq.length > 0 && (
+          <section class="end-block" aria-labelledby="pytania">
+            <h2 id="pytania">Pytania i odpowiedzi</h2>
+            {d.faq.map((f) => (
+              <details class="qa"><summary>{f.q}</summary><div class="qa__a"><p>{f.a}</p></div></details>
+            ))}
+          </section>
+        )}
+
+        {d.sources.length > 0 && (
+          <section class="end-block" aria-labelledby="podstawa">
+            <h2 id="podstawa">Podstawa prawna</h2>
+            <ul class="sources" role="list">
+              {d.sources.map((s) => {
+                const href = sourceHref(s);
+                const act = s.act ? acts[s.act] : undefined;
+                return (
+                  <li>
+                    {href ? <a href={href} rel="noopener" target="_blank">{s.label}</a> : <span>{s.label}</span>}
+                    {act?.id && <span>{act.name}, {act.id}, tekst jednolity w ISAP</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
+
+        <p class="disclaimer">Artykuł opisuje przepisy w uproszczeniu i nie zastępuje porady prawnej w konkretnej sprawie. Stan prawny: {formatMonth(d.legalState)}.</p>
+
+        <div class="author-box">
+          <Image src={avatar} alt="" width={144} height={144} format="webp" />
+          <p><strong>{d.author}</strong>Założycielka Proxima Legal, prawo gospodarcze i transakcje M&A.</p>
+        </div>
+      </div>
+
+      <aside class="article-aside" aria-label="Spis treści i kontakt">
+        {toc.length > 1 && (
+          <nav class="toc" aria-labelledby="toc-title" data-toc>
+            <h2 id="toc-title">W artykule</h2>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </nav>
+        )}
+        {isCrisis ? (
+          <div class="aside-box aside-box--rescue">
+            <h2>Termin już biegnie?</h2>
+            <p>Legal Rescue: diagnoza, plan i prowadzenie postępowania w jednym ryczałcie.</p>
+            <a class="btn btn--rescue" href="/legal-rescue/">Legal Rescue</a>
+          </div>
+        ) : (
+          <div class="aside-box">
+            <h2>Masz podobną sprawę?</h2>
+            <p>Pierwsza rozmowa trwa 30 minut i jest bezpłatna.</p>
+            <a class="btn btn--primary on-dark" href="/kontakt/">Umów konsultację</a>
+          </div>
+        )}
+      </aside>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="section band" aria-labelledby="more-title">
+      <div class="container">
+        <div class="section-head"><h2 id="more-title" class="h2">Czytaj dalej</h2></div>
+        <ul class="cards cards--3" role="list">
+          {related.map((a) => <li><ArticleCard href={`/baza-wiedzy/${a.id}/`} title={a.data.title} lead={a.data.lead} category={a.data.category} minutes={a.data.readingTime} /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+</Base>

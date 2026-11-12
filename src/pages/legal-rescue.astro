@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { formatPrice } from '../data/site';
+import { rescue } from '../data/offer';
+import portrait from '../assets/img/kinga-adamus-studio.jpg';
+// Portret doradcy restrukturyzacyjnego: wstaw import zdjęcia, gdy będzie gotowe (ten sam kadr i światło co portret obok).
+const advisorPhoto: ImageMetadata | null = null;
+
+const crumbs = [{ name: 'Legal Rescue', href: '/legal-rescue/' }];
+const priceFmt = formatPrice(rescue.price);
+const phaseOf = (d: number) => rescue.stages.findIndex((s) => d >= s.from && d <= s.to) + 1;
+const days = Array.from({ length: 30 }, (_, i) => i + 1);
+
+const service = {
+  '@type': 'Service',
+  '@id': 'https://proximalegal.pl/legal-rescue/#usluga',
+  name: 'Legal Rescue: obsługa spółki w kryzysie',
+  serviceType: 'Restrukturyzacja i upadłość spółki, ochrona członków zarządu',
+  provider: { '@id': 'https://proximalegal.pl/#kancelaria' },
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  description: 'Diagnoza niewypłacalności, mapa ryzyk zarządu z art. 299 i 586 KSH, negocjacje z wierzycielami oraz prowadzenie restrukturyzacji albo wniosku o upadłość w jednym ryczałcie.',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'PLN',
+    price: rescue.price,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: rescue.price,
+      priceCurrency: 'PLN',
+      unitText: 'miesiąc',
+      valueAddedTaxIncluded: false,
+      description: 'Od 9 900 zł netto miesięcznie, do zamknięcia sprawy. Poza ryczałtem: opłaty sądowe, wynagrodzenie nadzorcy, zarządcy lub syndyka, opinie biegłych, VAT 23%.',
+    },
+  },
+};
+---
+<Base
+  title="Legal Rescue: spółka traci płynność, zarząd ma 30 dni"
+  description="Spółka niewypłacalna? Zarząd ma 30 dni na wniosek o upadłość albo restrukturyzację. Diagnoza, ochrona zarządu i plan wyjścia w jednym ryczałcie od 9 900 zł netto."
+  image="/og/rescue.png"
+  breadcrumbs={crumbs}
+  jsonLd={[service]}
+>
+  <section class="page-hero rescue-surface rescue-hero" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <div class="rescue-hero__grid">
+        <div>
+          <p class="kicker">Legal Rescue, spółka w kryzysie</p>
+          <h1 id="page-title" class="h1">Spółka traci płynność. Zarząd ma 30 dni na decyzję.</h1>
+          <p class="lead page-hero__lead">Od dnia, w którym spółka staje się niewypłacalna, zarząd ma 30 dni na wniosek o upadłość albo otwarcie restrukturyzacji. Po terminie członkowie zarządu ryzykują odpowiedzialność za długi spółki własnym majątkiem. Prawnik i licencjonowany doradca restrukturyzacyjny pracują u nas na jednym planie, żeby ten czas wykorzystać.</p>
+        </div>
+        <aside class="urgent-card" aria-labelledby="urgent-title">
+          <h2 id="urgent-title">Pilna rozmowa</h2>
+          <p><strong>Oddzwaniamy tego samego dnia roboczego.</strong></p>
+          <p>Rozmowa jest poufna. Weź ze sobą listę zaległych zobowiązań i ostatni bilans, jeśli je masz.</p>
+          <a class="btn btn--rescue" href="/kontakt/?temat=pilne">Umów pilną rozmowę</a>
+          <p class="urgent-card__price">od <strong class="num">{priceFmt} zł</strong> netto / mies.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="sig-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker kicker--rescue mt-0">Kiedy przyjść</p>
+        <h2 id="sig-title" class="h2">Sygnały, że termin mógł już zacząć biec</h2>
+      </div>
+      <div class="signals">
+        {rescue.signals.map((s) => <div class="signal"><h3 class="h3">{s.t}</h3><p>{s.d}</p></div>)}
+      </div>
+      <p class="mt-m small muted">Szczegóły: <a class="link" href="/baza-wiedzy/30-dni-na-wniosek-o-upadlosc/">30 dni na wniosek o upadłość. Od kiedy liczyć termin</a></p>
+    </div>
+  </section>
+
+  <section class="section band days" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker kicker--rescue mt-0">Jak pracujemy</p>
+        <h2 id="how-title" class="h2">Trzy etapy w 30 dniach</h2>
+      </div>
+      <div class="days-grid" aria-hidden="true">
+        {days.map((d) => <span class={`p${phaseOf(d)}`}>{d}</span>)}
+      </div>
+      <ol class="phases" role="list">
+        {rescue.stages.map((s) => (
+          <li class="phase"><span class="phase__days">{s.days}</span><h3 class="h3">{s.t}</h3><p>{s.d}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="get-title">
+    <div class="container deliver">
+      <div>
+        <p class="kicker kicker--rescue">Co dostajesz</p>
+        <h2 id="get-title" class="h2">Jeden zespół na cały kryzys</h2>
+        <ol class="deliver__list mt-m" role="list">
+          {rescue.deliverables.map((d) => <li>{d}</li>)}
+        </ol>
+      </div>
+      <figure class="duo">
+        <Image src={portrait} alt="Kinga Adamus, założycielka Proxima Legal" widths={[320, 480, 640]} sizes="(min-width: 1000px) 20vw, 50vw" format="webp" loading="lazy" />
+        {advisorPhoto ? <Image src={advisorPhoto} alt="Licencjonowany doradca restrukturyzacyjny" widths={[320, 480, 640]} sizes="(min-width: 1000px) 20vw, 50vw" format="webp" loading="lazy" /> : (
+          <div class="duo__note">
+            <p class="h3">Prawnik i doradca restrukturyzacyjny</p>
+            <p>Pracują na jednym planie: prawnik ocenia ryzyka zarządu i prowadzi pisma, licencjonowany doradca restrukturyzacyjny diagnozuje niewypłacalność i prowadzi układ z wierzycielami.</p>
+          </div>
+        )}
+      </figure>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="paths-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker kicker--rescue mt-0">Możliwe drogi</p>
+        <h2 id="paths-title" class="h2">Sześć dróg wyjścia. Wybieramy jedną po diagnozie.</h2>
+      </div>
+      <div class="paths-scale" aria-hidden="true">{rescue.paths.map((p) => <span class={`lvl-${p.level}`}></span>)}</div>
+      <div class="paths-legend" aria-hidden="true"><span>Poza sądem, zarząd bez zmian</span><span>Syndyk, spółka przestaje działać</span></div>
+      <div class="paths-head" aria-hidden="true"><span>Droga</span><span>Kto czuwa</span><span>Zarząd</span><span>Ochrona przed egzekucją</span><span>Kiedy ma sens</span></div>
+      <ol class="paths" role="list">
+        {rescue.paths.map((p) => (
+          <li class="path">
+            <h3 class="path__name"><span class={`path__lvl lvl-${p.level}`} aria-hidden="true"></span>{p.name}</h3>
+            <dl>
+              <div><dt>Kto czuwa</dt><dd>{p.who}</dd></div>
+              <div><dt>Zarząd</dt><dd>{p.board}</dd></div>
+              <div><dt>Ochrona przed egzekucją</dt><dd>{p.protection}</dd></div>
+              <div><dt>Kiedy ma sens</dt><dd>{p.when}</dd></div>
+            </dl>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-m small muted">Opis uproszczony. O wyborze drogi decydują szczegóły sytuacji spółki, które ustalamy w diagnozie. Porównanie postępowań: <a class="link" href="/baza-wiedzy/restrukturyzacja-czy-upadlosc/">Restrukturyzacja czy upadłość?</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="price-title">
+    <div class="container">
+      <div class="price-block">
+        <div>
+          <p class="kicker kicker--rescue mt-0">Cena</p>
+          <h2 id="price-title" class="visually-hidden">Cena Legal Rescue</h2>
+          <p class="price-block__amount">{priceFmt} zł</p>
+          <p class="price-block__note">netto miesięcznie, do zamknięcia sprawy</p>
+          <a class="btn btn--rescue" href="/kontakt/?temat=pilne">Umów pilną rozmowę</a>
+        </div>
+        <div>
+          <h3>W ryczałcie</h3>
+          <ul class="checklist" role="list">{rescue.included.map((x) => <li>{x}</li>)}</ul>
+        </div>
+        <div>
+          <h3>Poza ryczałtem</h3>
+          <ul class="dashlist" role="list">{rescue.excluded.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand variant="rescue" />
+</Base>

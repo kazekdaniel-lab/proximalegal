@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { formatDate, formatMonth } from '../../data/site';
+
+const crumbs = [{ name: 'Opracowania prawne', href: '/legal/' }];
+const ORDER = ['utracona-korzysc', 'kara-umowna-a-odszkodowanie', 'umowne-ograniczenie-odpowiedzialnosci', 'przedawnienie-roszczen-odszkodowawczych', 'odsetki-i-rekompensata-w-transakcjach-handlowych'];
+const legal = (await getCollection('legal')).sort((a, b) => {
+  const ia = ORDER.indexOf(a.id), ib = ORDER.indexOf(b.id);
+  return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+});
+const docs = (await getCollection('dokumenty')).sort((a, b) => a.data.order - b.data.order);
+const newest = legal.reduce<Date | null>((m, e) => (!m || e.data.legalState > m ? e.data.legalState : m), null);
+const list = {
+  '@type': 'ItemList',
+  name: 'Opracowania prawne Proxima Legal',
+  itemListElement: legal.map((e, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.title, url: `https://proximalegal.pl/legal/${e.id}/` })),
+};
+const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+---
+<Base
+  title="Opracowania prawne: utracona korzyść, kary umowne"
+  description="Opracowania prawne: utracona korzyść (lucrum cessans), kara umowna a odszkodowanie, ograniczenie odpowiedzialności, przedawnienie i odsetki w obrocie."
+  image="/og/legal.png"
+  breadcrumbs={crumbs}
+  pageType="CollectionPage"
+  jsonLd={[list]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">Legal</p>
+      <h1 id="page-title" class="h1 page-hero__title">Opracowania prawne</h1>
+      <p class="lead page-hero__lead">Analizy instytucji prawa zobowiązań i prawa spółek w rejestrze komentarza. Każde opracowanie zawiera tezę, podstawę prawną z odesłaniem do tekstu ustawy, stan prawny i wnioski dla praktyki obrotu profesjonalnego.</p>
+      {newest && <p class="mt-m small muted">Stan prawny opracowań: {formatMonth(newest)}. Przystępne wersje tematów znajdziesz w <a class="link" href="/baza-wiedzy/">Bazie wiedzy</a>.</p>}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="op-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="op-title" class="h2">Opracowania</h2>
+      </div>
+      {legal.length === 0 && <p class="muted">Opracowania w przygotowaniu.</p>}
+      <ol class="commentaries" role="list">
+        {legal.map((e, i) => (
+          <li>
+            <a href={`/legal/${e.id}/`}>
+              <span class="commentaries__no">{roman[i] ?? i + 1}.</span>
+              <div>
+                <h3>{e.data.title}</h3>
+                <ul class="basis" role="list">{e.data.legalBasis.slice(0, 5).map((b) => <li>{b}</li>)}</ul>
+              </div>
+              <p>{e.data.thesis}</p>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="docs-title">
+    <div class="container split">
+      <div class="split__head">
+        <p class="kicker">Dokumenty</p>
+        <h2 id="docs-title" class="h2">Dokumenty strony</h2>
+        <p class="muted mt-s">Zasady przetwarzania danych, korzystania ze strony i informacje o kancelarii.</p>
+      </div>
+      <ul class="doc-index" role="list">
+        {docs.map((d) => (
+          <li><a href={`/legal/${d.id}/`}><strong>{d.data.title}</strong><span>aktualizacja {formatDate(d.data.updated)}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand title="Spór o odszkodowanie albo karę umowną?" text="Ocenimy podstawę roszczenia, szanse na wykazanie szkody i terminy przedawnienia. Pierwsza rozmowa trwa 30 minut i jest bezpłatna." />
+</Base>

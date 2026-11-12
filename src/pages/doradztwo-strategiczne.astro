@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { strategy } from '../data/offer';
+import room from '../assets/img/sala-spotkan.jpg';
+
+const crumbs = [{ name: 'Doradztwo strategiczne', href: '/doradztwo-strategiczne/' }];
+const service = {
+  '@type': 'Service',
+  '@id': 'https://proximalegal.pl/doradztwo-strategiczne/#usluga',
+  name: 'Doradztwo strategiczne z prawnikiem',
+  serviceType: 'Doradztwo strategiczne dla zarządu spółki',
+  provider: { '@id': 'https://proximalegal.pl/#kancelaria' },
+  areaServed: { '@type': 'Country', name: 'Polska' },
+  description: 'Doradca strategiczny pracuje z zarządem nad celami, modelem biznesowym i ryzykiem inwestycyjnym, a prawnik nadaje decyzjom formę prawną. Sesja 90 minut albo stała współpraca w abonamencie.',
+};
+---
+<Base
+  title="Doradztwo strategiczne dla zarządu spółki"
+  description="Cele na 12 i 36 miesięcy, model biznesowy, kierunki rozwoju i ryzyko inwestycyjne. Sesja 90 minut z pisemnymi rekomendacjami albo stała współpraca w abonamencie."
+  breadcrumbs={crumbs}
+  jsonLd={[service]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <div class="page-hero__grid page-hero__grid--media">
+        <div>
+          <p class="kicker">Doradztwo strategiczne</p>
+          <h1 id="page-title" class="h1 page-hero__title">Prawnik, który wie, dokąd zmierza Twoja firma.</h1>
+          <p class="lead page-hero__lead">Doradca strategiczny pracuje z zarządem nad celami, modelem biznesowym i ryzykiem inwestycyjnym. Prawnik siedzi przy tym samym stole, więc decyzje od razu mają sensowną formę prawną.</p>
+          <div class="btn-row page-hero__actions">
+            <a class="btn btn--primary" href="/kontakt/?temat=sesja">Umów sesję 90 minut</a>
+            <a class="btn btn--ghost" href="/abonament-prawny/#legal-strategia">Pakiety ze strategią</a>
+          </div>
+        </div>
+        <div class="page-hero__media">
+          <Image src={room} alt="Sala spotkań z tablicą, na której rozpisano plan rozwoju firmy" widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="scope-title">
+    <div class="container split">
+      <div class="split__head"><div class="sticky">
+        <p class="kicker">Zakres</p>
+        <h2 id="scope-title" class="h2">Nad czym pracujemy</h2>
+      </div></div>
+      <ul class="services" role="list">{strategy.scope.map((x) => <li><h3 class="h3">{x.t}</h3><p>{x.d}</p></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="fmt-title">
+    <div class="container">
+      <div class="section-head">
+        <p class="kicker mt-0">Dwa formaty</p>
+        <h2 id="fmt-title" class="h2">Jednorazowo albo na stałe</h2>
+      </div>
+      <div class="formats">
+        <article class="format">
+          <span class="muted small">Jedna decyzja</span>
+          <h3 class="h2">Sesja 90 minut</h3>
+          <p>Rozmowa o jednym konkretnym problemie. W ciągu trzech dni roboczych dostajesz pisemne podsumowanie z rekomendacjami.</p>
+          <ol role="list">{strategy.session.steps.map((s) => <li>{s}</li>)}</ol>
+          <div class="format__foot">
+            {strategy.session.price ? <span class="price-tag">{strategy.session.price}</span> : <span class="muted small">Wycena po konsultacji</span>}
+            <a class="btn btn--primary" href="/kontakt/?temat=sesja">Umów sesję</a>
+          </div>
+        </article>
+        <article class="format format--dark">
+          <span class="muted small">Stała współpraca</span>
+          <h3 class="h2">W abonamencie</h3>
+          <p>Doradca strategiczny jest częścią pakietów Legal + Strategia i All-in-One. Spotyka się z zarządem co miesiąc albo co dwa tygodnie.</p>
+          <ul class="checklist mt-m" role="list">{strategy.ongoing.map((s) => <li>{s}</li>)}</ul>
+          <div class="format__foot">
+            <a class="btn btn--primary on-dark" href="/abonament-prawny/#legal-strategia">Zobacz pakiety</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

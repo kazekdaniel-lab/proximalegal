@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { site } from '../../data/site';
+import office from '../../assets/img/biuro-warszawa.jpg';
+
+const crumbs = [{ name: 'Kontakt', href: '/kontakt/' }];
+const contactLd = {
+  '@type': 'ContactPoint',
+  '@id': 'https://proximalegal.pl/kontakt/#kontakt',
+  contactType: 'customer service',
+  email: site.email,
+  areaServed: 'PL',
+  availableLanguage: ['pl'],
+  ...(site.phone ? { telephone: site.phone } : {}),
+};
+---
+<Base
+  title="Kontakt: bezpłatna konsultacja 30 minut"
+  description="Napisz, z czym przychodzisz. Odpowiadamy w ciągu jednego dnia roboczego. Pierwsza rozmowa trwa 30 minut i jest bezpłatna, w biurze w Warszawie albo online."
+  breadcrumbs={crumbs}
+  pageType="ContactPage"
+  jsonLd={[contactLd]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">Kontakt</p>
+      <h1 id="page-title" class="h1 page-hero__title">Porozmawiajmy o Twojej firmie.</h1>
+      <p class="lead page-hero__lead">Pierwsza rozmowa trwa 30 minut i jest bezpłatna. Napisz, z czym przychodzisz, a odezwiemy się w ciągu jednego dnia roboczego.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Formularz i dane kontaktowe">
+    <div class="container contact">
+      <form class="form" name="kontakt" method="POST" action="/kontakt/dziekujemy/" data-netlify="true" netlify-honeypot="firma-www" data-validate>
+        <input type="hidden" name="form-name" value="kontakt" />
+        <p class="hp" aria-hidden="true"><label>Nie wypełniaj: <input name="firma-www" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="field">
+          <label for="f-name">Imię i nazwisko</label>
+          <input id="f-name" name="imie-nazwisko" type="text" autocomplete="name" required aria-describedby="f-name-error" />
+          <p class="field__error" id="f-name-error" hidden>Wpisz imię i nazwisko.</p>
+        </div>
+        <div class="field">
+          <label for="f-contact">E-mail lub telefon</label>
+          <input id="f-contact" name="kontakt" type="text" autocomplete="email" inputmode="email" required aria-describedby="f-contact-hint f-contact-error" />
+          <p class="hint" id="f-contact-hint">Odpowiemy tam, gdzie wskażesz.</p>
+          <p class="field__error" id="f-contact-error" hidden>Podaj e-mail albo numer telefonu.</p>
+        </div>
+        <div class="field">
+          <label for="f-msg">W czym możemy pomóc?</label>
+          <textarea id="f-msg" name="wiadomosc" required aria-describedby="f-msg-hint f-msg-error"></textarea>
+          <p class="hint" id="f-msg-hint">Wystarczy kilka zdań. Nie załączaj dokumentów sprawy, poprosimy o nie po rozmowie.</p>
+          <p class="field__error" id="f-msg-error" hidden>Opisz krótko sprawę.</p>
+        </div>
+        <label class="check" for="f-urgent">
+          <input id="f-urgent" name="sprawa-pilna" type="checkbox" value="tak" />
+          <span><strong>Sprawa pilna: spółka traci płynność</strong><span>Oddzwaniamy tego samego dnia roboczego.</span></span>
+        </label>
+        <p class="form__consent">Dane z formularza wykorzystamy tylko po to, żeby odpowiedzieć na wiadomość. Zasady opisuje <a class="link" href="/legal/polityka-prywatnosci/">polityka prywatności</a>.</p>
+        <button class="btn btn--primary" type="submit">Wyślij</button>
+      </form>
+
+      <div>
+        <dl class="contact-info">
+          <div><dt>E-mail</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          {site.phone && <div><dt>Telefon</dt><dd><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></dd></div>}
+          <div><dt>Biuro</dt><dd>{site.address.street ? `${site.address.street}, ${site.address.postalCode} Warszawa` : 'Warszawa'}</dd></div>
+          <div><dt>Czas odpowiedzi</dt><dd>1 dzień roboczy</dd></div>
+        </dl>
+        <Image src={office} alt="Biuro Proxima Legal w Warszawie" widths={[480, 720]} sizes="(min-width: 1000px) 35vw, 100vw" format="webp" loading="lazy" class="contact-photo" />
+        <p class="mt-s small muted">Z klientami spoza Warszawy pracujemy zdalnie. Spotkania na miejscu umawiamy według potrzeb.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-photo { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--r-panel); margin-top: 32px; }
+</style>
+
+<script>
+  // Prefill z parametrów: ?temat=pilne zaznacza pilność, ?pakiet=... i ?temat=sesja dopisują kontekst.
+  const params = new URLSearchParams(location.search);
+  const urgent = document.getElementById('f-urgent') as HTMLInputElement | null;
+  const msg = document.getElementById('f-msg') as HTMLTextAreaElement | null;
+  if (params.get('temat') === 'pilne' && urgent) urgent.checked = true;
+  const names: Record<string, string> = { 'legal-starter': 'Legal Starter', 'legal-finanse': 'Legal + Finanse', 'legal-strategia': 'Legal + Strategia', 'all-in-one': 'All-in-One' };
+  const p = params.get('pakiet');
+  if (msg && !msg.value) {
+    if (p && names[p]) msg.value = `Interesuje mnie pakiet ${names[p]}. `;
+    else if (params.get('temat') === 'sesja') msg.value = 'Chcę umówić sesję strategiczną 90 minut. Temat: ';
+  }
+</script>

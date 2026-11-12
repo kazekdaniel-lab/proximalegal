@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  lead: string;
+  category: string;
+  minutes?: number;
+  headingLevel?: 'h2' | 'h3';
+}
+const { href, title, lead, category, minutes, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<a class="card" href={href} data-cat={category}>
+  <span class="card__cat" data-cat={category}>{category}</span>
+  <H class="card__title">{title}</H>
+  <p class="card__lead">{lead}</p>
+  {minutes && <span class="card__meta"><span>{minutes} min czytania</span><span aria-hidden="true">Czytaj</span></span>}
+</a>

@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faqGroups } from '../data/offer';
+
+const crumbs = [{ name: 'FAQ', href: '/faq/' }];
+const faqLd = {
+  '@type': 'FAQPage',
+  '@id': 'https://proximalegal.pl/faq/#faq',
+  mainEntity: faqGroups.flatMap((g) => g.items).map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a },
+  })),
+};
+---
+<Base
+  title="FAQ: abonament prawny, Legal Rescue i współpraca"
+  description="Co obejmuje ryczałt, co po przekroczeniu puli godzin, czy prowadzimy sprawy sądowe, ile kosztuje restrukturyzacja poza ryczałtem i jak wygląda pierwsze spotkanie."
+  breadcrumbs={crumbs}
+  jsonLd={[faqLd]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">FAQ</p>
+      <h1 id="page-title" class="h1 page-hero__title">Cena, proces i zakres, bez niedopowiedzeń</h1>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Pytania i odpowiedzi">
+    <div class="container container--narrow">
+      <nav class="faq-nav pill-list" aria-label="Grupy pytań">
+        {faqGroups.map((g) => <a href={`#${g.id}`}>{g.label}</a>)}
+      </nav>
+      {faqGroups.map((g) => (
+        <div class="faq-group" id={g.id}>
+          <h2 class="h3">{g.label}</h2>
+          {g.items.map((it, i) => (
+            <details class="qa" open={i === 0 && g.id === 'abonament'}>
+              <summary>{it.q}</summary>
+              <div class="qa__a"><p>{it.a}</p></div>
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand title="Nie znalazłeś odpowiedzi?" text="Napisz albo umów bezpłatną konsultację. Wyjaśnimy wszystko na spokojnie." />
+</Base>

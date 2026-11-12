@@ -1,0 +1,47 @@
+# proximalegal.pl - dostęp dla wyszukiwarek i asystentów AI
+# Strona chce być cytowana w Google (w tym AI Overviews i AI Mode), Bing/Copilot,
+# ChatGPT Search, Perplexity i Claude. Dlatego crawlery wyszukiwarek i asystentów są wpuszczone.
+# Jeśli kancelaria nie chce, żeby treści trafiały do TRENINGU modeli, dopisz Disallow: /
+# tylko dla: GPTBot, Google-Extended, Applebot-Extended, CCBot, ClaudeBot (crawlery wyszukiwania zostaw).
+
+User-agent: *
+Allow: /
+Disallow: /kontakt/dziekujemy/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://proximalegal.pl/sitemap-index.xml

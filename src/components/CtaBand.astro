@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+import office from '../assets/img/biuro-warszawa.jpg';
+interface Props { variant?: 'default' | 'rescue'; title?: string; text?: string }
+const {
+  variant = 'default',
+  title = variant === 'rescue' ? 'Każdy tydzień zwłoki zawęża wybór.' : 'Porozmawiajmy o Twojej firmie.',
+  text = variant === 'rescue'
+    ? 'Zadzwoń albo napisz. Rozmowa jest poufna i nie zobowiązuje do współpracy.'
+    : 'Pierwsza rozmowa trwa 30 minut i jest bezpłatna. Opisz, z czym przychodzisz. Odpowiadamy w ciągu jednego dnia roboczego.',
+} = Astro.props;
+---
+<section class:list={['cta-band dark', { 'cta-band--rescue': variant === 'rescue' }]} aria-labelledby="cta-title">
+  <div class="container cta-band__grid">
+    <div>
+      <h2 id="cta-title" class="h2 cta-band__title">{title}</h2>
+      <p>{text}</p>
+      <div class="btn-row">
+        {variant === 'rescue' ? (
+          <a class="btn btn--rescue" href="/kontakt/?temat=pilne">Umów pilną rozmowę</a>
+        ) : (
+          <>
+            <a class="btn btn--primary" href="/kontakt/">Umów bezpłatną konsultację</a>
+            <a class="link link--rescue" href="/legal-rescue/">Sprawa pilna? Legal Rescue</a>
+          </>
+        )}
+      </div>
+    </div>
+    {variant === 'default' && (
+      <div class="cta-band__media">
+        <Image src={office} alt="Kinga Adamus przy biurku w biurze Proxima Legal w Warszawie" widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="lazy" />
+      </div>
+    )}
+  </div>
+</section>

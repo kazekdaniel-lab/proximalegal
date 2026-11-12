@@ -1,0 +1,65 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Nagłówki bezpieczeństwa. CSP jest w <meta> każdej strony (Astro liczy hashe skryptów).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+# www -> bez www (domena główna ustawiona w panelu Netlify)
+[[redirects]]
+  from = "https://www.proximalegal.pl/*"
+  to = "https://proximalegal.pl/:splat"
+  status = 301
+  force = true
+
+# skróty i stare nazwy
+[[redirects]]
+  from = "/polityka-prywatnosci"
+  to = "/legal/polityka-prywatnosci/"
+  status = 301
+[[redirects]]
+  from = "/regulamin"
+  to = "/legal/regulamin/"
+  status = 301
+[[redirects]]
+  from = "/rescue"
+  to = "/legal-rescue/"
+  status = 301
+[[redirects]]
+  from = "/abonament"
+  to = "/abonament-prawny/"
+  status = 301
+[[redirects]]
+  from = "/wiedza"
+  to = "/baza-wiedzy/"
+  status = 301
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301

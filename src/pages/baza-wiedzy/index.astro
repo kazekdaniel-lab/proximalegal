@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const crumbs = [{ name: 'Baza wiedzy', href: '/baza-wiedzy/' }];
+const CATS = ['Start i rejestracja', 'Umowy i dokumenty', 'Finansowanie', 'Kryzys i restrukturyzacja'] as const;
+const ORDER = [
+  'odpowiedzialnosc-zarzadu-art-299-ksh', 'restrukturyzacja-czy-upadlosc', '30-dni-na-wniosek-o-upadlosc',
+  'jak-zalozyc-spolke-z-oo', 'spolka-z-oo-czy-psa', 'kiedy-przeksztalcic-jdg-w-spolke',
+  'term-sheet-bez-tajemnic', 'due-diligence-od-strony-sprzedajacego',
+  'bledy-w-umowach-b2b', 'umowa-o-prace-b2b-czy-zlecenie', 'nda-kiedy-chroni',
+];
+const all = (await getCollection('baza-wiedzy')).sort((a, b) => {
+  const ia = ORDER.indexOf(a.id), ib = ORDER.indexOf(b.id);
+  return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+});
+const count = (c: string) => all.filter((a) => a.data.category === c).length;
+const list = {
+  '@type': 'ItemList',
+  name: 'Baza wiedzy Proxima Legal',
+  itemListElement: all.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.data.title, url: `https://proximalegal.pl/baza-wiedzy/${a.id}/` })),
+};
+---
+<Base
+  title="Baza wiedzy: prawo spółek językiem przedsiębiorcy"
+  description="Przewodniki o zakładaniu spółek, umowach B2B, finansowaniu i wychodzeniu z kryzysu, pisane przez prawników, którzy prowadzą takie sprawy na co dzień."
+  image="/og/wiedza.png"
+  breadcrumbs={crumbs}
+  pageType="CollectionPage"
+  jsonLd={[list]}
+>
+  <section class="page-hero dark" aria-labelledby="page-title">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker">Baza wiedzy</p>
+      <h1 id="page-title" class="h1 page-hero__title">Prawo spółek opisane językiem przedsiębiorcy</h1>
+      <p class="lead page-hero__lead">Przewodniki o zakładaniu spółek, umowach, finansowaniu i wychodzeniu z kryzysu. Piszą je prawnicy, którzy prowadzą takie sprawy na co dzień.</p>
+      <p class="mt-m small muted">Szukasz analizy w języku prawniczym? <a class="link" href="/legal/">Opracowania prawne</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Artykuły">
+    <div class="container">
+      <div class="filters" data-filter="#kb-list" role="group" aria-label="Filtruj według kategorii">
+        <button type="button" data-cat="all" aria-pressed="true">Wszystkie<span class="count">{all.length}</span></button>
+        {CATS.map((c) => <button type="button" data-cat={c} aria-pressed="false">{c}<span class="count">{count(c)}</span></button>)}
+      </div>
+      <p class="visually-hidden" aria-live="polite" data-filter-status></p>
+      <ul class="cards cards--3" id="kb-list" role="list">
+        {all.map((a) => (
+          <li><ArticleCard href={`/baza-wiedzy/${a.id}/`} title={a.data.title} lead={a.data.lead} category={a.data.category} minutes={a.data.readingTime} headingLevel="h2" /></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

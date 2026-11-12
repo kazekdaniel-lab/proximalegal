@@ -1,0 +1,74 @@
+---
+import Logo from './Logo.astro';
+import { mainNav, type NavGroup, type NavItem } from '../data/nav';
+
+const path = Astro.url.pathname;
+const isGroup = (x: NavGroup | NavItem): x is NavGroup => 'items' in x;
+const groupCurrent = (g: NavGroup) => g.items.some((i) => path.startsWith(i.href)) || (g.href ? path.startsWith(g.href) : false);
+const chevron = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label="Proxima Legal, strona główna">
+      <Logo />
+      <span class="brand__name">Proxima <span>Legal</span></span>
+    </a>
+
+    <nav class="nav" aria-label="Główna nawigacja">
+      <ul class="nav__list">
+        {mainNav.map((item, idx) =>
+          isGroup(item) ? (
+            <li class:list={['nav__item', { 'is-current': groupCurrent(item) }]} data-nav-item>
+              <button class="nav__trigger" type="button" aria-expanded="false" aria-controls={`nav-panel-${idx}`} data-nav-trigger>
+                {item.label}<Fragment set:html={chevron} />
+              </button>
+              <div class="nav__panel" id={`nav-panel-${idx}`}>
+                {item.href && (
+                  <a href={item.href}><strong>Wszystkie specjalizacje</strong><span>Cztery etapy, jedna kancelaria</span></a>
+                )}
+                {item.items.map((sub) => (
+                  <a href={sub.href} class:list={{ 'is-rescue': sub.tone === 'rescue' }} aria-current={path === sub.href ? 'page' : undefined}>
+                    <strong>{sub.label}</strong>
+                    {sub.note && <span>{sub.note}</span>}
+                  </a>
+                ))}
+              </div>
+            </li>
+          ) : (
+            <li class="nav__item">
+              <a class="nav__link" href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="urgent-link" href="/legal-rescue/"><span class="urgent-dot" aria-hidden="true"></span><span class="urgent-text">Spółka traci płynność?</span><span class="visually-hidden"> Legal Rescue</span></a>
+      <a class="btn btn--primary on-dark" href="/kontakt/">Umów konsultację</a>
+    </div>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="menu-toggle__bars" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+    {mainNav.map((item) =>
+      isGroup(item) ? (
+        <div class="mobile-menu__group">
+          <p class="mobile-menu__label">{item.label}</p>
+          {item.href && <a href={item.href}>Wszystkie specjalizacje</a>}
+          {item.items.map((sub) => <a href={sub.href} class:list={{ 'is-rescue': sub.tone === 'rescue' }}>{sub.label}</a>)}
+        </div>
+      ) : (
+        <div class="mobile-menu__group"><a href={item.href}>{item.label}</a></div>
+      )
+    )}
+    <div class="mobile-menu__cta">
+      <a class="btn btn--primary on-dark" href="/kontakt/">Umów bezpłatną konsultację</a>
+      <a class="btn btn--rescue" href="/legal-rescue/">Sprawa pilna? Legal Rescue</a>
+    </div>
+  </div>
+</header>

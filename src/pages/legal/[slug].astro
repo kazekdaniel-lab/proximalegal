@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { acts, sourceHref, formatDate, formatMonth, site } from '../../data/site';
+import { articleLd, faqLd } from '../../lib/ld';
+import { wordCount } from '../../lib/text';
+import { legalNav } from '../../data/nav';
+import avatar from '../../assets/img/kinga-adamus-avatar.jpg';
+
+export async function getStaticPaths() {
+  const legal = await getCollection('legal');
+  const docs = await getCollection('dokumenty');
+  return [
+    ...legal.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'legal' as const, entry } })),
+    ...docs.map((entry) => ({ params: { slug: entry.id }, props: { kind: 'doc' as const, entry } })),
+  ];
+}
+type Props =
+  | { kind: 'legal'; entry: CollectionEntry<'legal'> }
+  | { kind: 'doc'; entry: CollectionEntry<'dokumenty'> };
+
+const props = Astro.props;
+const { Content, headings } = await render(props.entry);
+const toc = headings.filter((h) => h.depth === 2);
+const url = `${site.url}/legal/${props.entry.id}/`;
+const crumbs = [
+  { name: 'Opracowania prawne', href: '/legal/' },
+  { name: props.kind === 'legal' ? props.entry.data.shortTitle : props.entry.data.title, href: `/legal/${props.entry.id}/` },
+];
+
+let ld: Record<string, unknown>[] = [];
+let relatedLegal: CollectionEntry<'legal'>[] = [];
+let relatedBw: CollectionEntry<'baza-wiedzy'>[] = [];
+if (props.kind === 'legal') {
+  const d = props.entry.data;
+  ld = [
+    articleLd({ url, title: d.title, description: d.description, published: d.published, updated: d.updated, section: 'Opracowania prawne', keywords: d.keywords, sources: d.sources, wordCount: wordCount(props.entry.body ?? ''), genre: 'opracowanie prawne', image: '/og/legal.png' }),
+    ...(d.faq.length ? [faqLd(url, d.faq)] : []),
+  ];
+  const legal = await getCollection('legal');
+  relatedLegal = d.related.map((id) => legal.find((e) => e.id === id)).filter((e): e is NonNullable<typeof e> => Boolean(e));
+  const bw = await getCollection('baza-wiedzy');
+  relatedBw = d.relatedBw.map((id) => bw.find((e) => e.id === id)).filter((e): e is NonNullable<typeof e> => Boolean(e));
+}
+const roman = (n: number) => ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'][n] ?? String(n + 1);
+---
+{props.kind === 'legal' ? (
+  <Base title={props.entry.data.title} description={props.entry.data.description} type="article" image="/og/legal.png" breadcrumbs={crumbs} published={props.entry.data.published} modified={props.entry.data.updated} jsonLd={ld}>
+    <article>
+      <header class="article-head">
+        <div class="container">
+          <Breadcrumbs items={crumbs} />
+          <p class="kicker">Opracowanie prawne</p>
+          <h1 class="h1">{props.entry.data.title}</h1>
+          <ul class="basis" role="list" aria-label="Podstawa prawna">{props.entry.data.legalBasis.map((b) => <li>{b}</li>)}</ul>
+          <section class="thesis" aria-labelledby="teza"><h2 id="teza">Teza</h2><p>{props.entry.data.thesis}</p></section>
+          <dl class="article-meta">
+            <div><dt>Autorka</dt><dd><a href="/o-nas/">{props.entry.data.author}</a></dd></div>
+            {props.entry.data.readingTime && <div><dt>Czas czytania</dt><dd>{props.entry.data.readingTime} min</dd></div>}
+            <div><dt>Stan prawny na</dt><dd><time datetime={props.entry.data.legalState.toISOString().slice(0, 10)}>{formatDate(props.entry.data.legalState)}</time></dd></div>
+            <div><dt>Aktualizacja</dt><dd><time datetime={props.entry.data.updated.toISOString().slice(0, 10)}>{formatDate(props.entry.data.updated)}</time></dd></div>
+          </dl>
+        </div>
+      </header>
+
+      <div class="container article-layout">
+        <div>
+          {props.entry.data.summary.length > 0 && (
+            <section class="summary-box" aria-labelledby="w-skrocie">
+              <h2 id="w-skrocie">W skrócie</h2>
+              <ul>{props.entry.data.summary.map((s) => <li>{s}</li>)}</ul>
+            </section>
+          )}
+          <div class="prose commentary"><Content /></div>
+
+          {props.entry.data.faq.length > 0 && (
+            <section class="end-block" aria-labelledby="pytania">
+              <h2 id="pytania">Pytania i odpowiedzi</h2>
+              {props.entry.data.faq.map((f) => <details class="qa"><summary>{f.q}</summary><div class="qa__a"><p>{f.a}</p></div></details>)}
+            </section>
+          )}
+
+          {props.entry.data.sources.length > 0 && (
+            <section class="end-block" aria-labelledby="podstawa">
+              <h2 id="podstawa">Akty prawne</h2>
+              <ul class="sources" role="list">
+                {props.entry.data.sources.map((s) => {
+                  const href = sourceHref(s);
+                  const act = s.act ? acts[s.act] : undefined;
+                  return <li>{href ? <a href={href} rel="noopener" target="_blank">{s.label}</a> : <span>{s.label}</span>}{act?.id && <span>{act.name}, {act.id}, tekst jednolity w ISAP</span>}</li>;
+                })}
+              </ul>
+            </section>
+          )}
+
+          <section class="cite-box" aria-labelledby="cytuj">
+            <h2 id="cytuj">Jak cytować</h2>
+            <p>{props.entry.data.author}, <em>{props.entry.data.title}</em>, Proxima Legal, stan prawny na {formatDate(props.entry.data.legalState)}, {url}</p>
+          </section>
+
+          <p class="disclaimer">Opracowanie ma charakter ogólny i informacyjny. Nie stanowi porady prawnej ani opinii w konkretnej sprawie. Numery na marginesie to numery brzegowe akapitów, ułatwiające powoływanie się na fragment tekstu.</p>
+
+          <div class="author-box">
+            <Image src={avatar} alt="" width={144} height={144} format="webp" />
+            <p><strong>{props.entry.data.author}</strong>Założycielka Proxima Legal, prawo gospodarcze i transakcje M&A.</p>
+          </div>
+        </div>
+
+        <aside class="article-aside" aria-label="Spis treści i kontakt">
+          {toc.length > 1 && (
+            <nav class="toc" aria-labelledby="toc-title" data-toc>
+              <h2 id="toc-title">Spis treści</h2>
+              <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            </nav>
+          )}
+          <div class="aside-box">
+            <h2>Spór o odszkodowanie?</h2>
+            <p>Ocenimy podstawę roszczenia, dowody szkody i terminy. Pierwsza rozmowa jest bezpłatna.</p>
+            <a class="btn btn--primary on-dark" href="/kontakt/">Umów konsultację</a>
+          </div>
+        </aside>
+      </div>
+    </article>
+
+    {(relatedLegal.length > 0 || relatedBw.length > 0) && (
+      <section class="section band" aria-labelledby="more-title">
+        <div class="container">
+          <div class="section-head"><h2 id="more-title" class="h2">Powiązane</h2></div>
+          {relatedLegal.length > 0 && (
+            <ol class="commentaries" role="list">
+              {relatedLegal.map((e, i) => (
+                <li><a href={`/legal/${e.id}/`}><span class="commentaries__no">{roman(i)}.</span><div><h3>{e.data.title}</h3><ul class="basis" role="list">{e.data.legalBasis.slice(0, 4).map((b) => <li>{b}</li>)}</ul></div><p>{e.data.thesis}</p></a></li>
+              ))}
+            </ol>
+          )}
+          {relatedBw.length > 0 && (
+            <ul class="cards cards--3 mt-l" role="list">
+              {relatedBw.map((a) => <li><ArticleCard href={`/baza-wiedzy/${a.id}/`} title={a.data.title} lead={a.data.lead} category={a.data.category} minutes={a.data.readingTime} /></li>)}
+            </ul>
+          )}
+        </div>
+      </section>
+    )}
+  </Base>
+) : (
+  <Base title={props.entry.data.title} description={props.entry.data.description} breadcrumbs={crumbs} modified={props.entry.data.updated}>
+    <article class="doc">
+      <header class="article-head">
+        <div class="container">
+          <Breadcrumbs items={crumbs} />
+          <p class="kicker">Dokumenty</p>
+          <h1 class="h1">{props.entry.data.title}</h1>
+          <dl class="article-meta">
+            <div><dt>Obowiązuje od</dt><dd><time datetime={props.entry.data.updated.toISOString().slice(0, 10)}>{formatDate(props.entry.data.updated)}</time></dd></div>
+            <div><dt>Kontakt w sprawie dokumentu</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          </dl>
+        </div>
+      </header>
+      <div class="container article-layout">
+        <div class="prose"><Content /></div>
+        <aside class="article-aside" aria-label="Spis treści i inne dokumenty">
+          {toc.length > 1 && (
+            <nav class="toc" aria-labelledby="toc-title" data-toc>
+              <h2 id="toc-title">Spis treści</h2>
+              <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+            </nav>
+          )}
+          <nav class="toc" aria-labelledby="docs-title">
+            <h2 id="docs-title">Inne dokumenty</h2>
+            <ol>{legalNav.filter((l) => l.href !== `/legal/${props.entry.id}/`).map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ol>
+          </nav>
+        </aside>
+      </div>
+    </article>
+  </Base>
+)}

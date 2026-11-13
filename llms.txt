@@ -1,0 +1,47 @@
+# Proxima Legal
+
+> Kancelaria dla spółek na każdym etapie: od rejestracji, przez wzrost, po trudne decyzje. Abonament prawny w stałym ryczałcie i Legal Rescue dla spółek w kryzysie. Warszawa i online.
+
+Kancelaria prowadzi spółki przez cztery etapy: start i rejestracja, finansowanie i M&A, bieżąca obsługa oraz kryzys i restrukturyzacja. Pracuje w Warszawie i online. Pierwsza konsultacja trwa 30 minut i jest bezpłatna. Odpowiedź w abonamencie: 1 dzień roboczy.
+
+## Oferta
+- [Abonament prawny](https://proximalegal.pl/abonament-prawny/): stały prawnik, ryczałt miesięczny z pulą godzin, 4 pakiety (Legal Starter, Legal + Finanse, Legal + Strategia, All-in-One), wycena po konsultacji.
+- [Legal Rescue](https://proximalegal.pl/legal-rescue/): spółka traci płynność, zarząd ma 30 dni na wniosek; diagnoza, ochrona zarządu, restrukturyzacja albo upadłość; od 9 900 zł netto miesięcznie.
+- [Doradztwo strategiczne](https://proximalegal.pl/doradztwo-strategiczne/): sesja 90 minut albo stała współpraca w abonamencie.
+
+## Specjalizacje
+- [Start i rejestracja](https://proximalegal.pl/specjalizacje/start-i-rejestracja/): Spółka założona tak, żeby za dwa lata nie trzeba było jej poprawiać.
+- [Finansowanie i M&A](https://proximalegal.pl/specjalizacje/finansowanie-i-ma/): Rundy, wejście inwestora i sprzedaż udziałów. Po Twojej stronie stołu.
+- [Bieżąca obsługa](https://proximalegal.pl/specjalizacje/biezaca-obsluga/): Umowy, pracownicy, uchwały i KRS. Stały prawnik, który zna Twoją firmę.
+- [Kryzys i restrukturyzacja](https://proximalegal.pl/specjalizacje/kryzys-i-restrukturyzacja/): Utrata płynności, wierzyciele, odpowiedzialność zarządu. Plan na czas, którego jest mało.
+
+## Baza wiedzy (język przedsiębiorcy)
+- [30 dni na wniosek o upadłość. Od kiedy liczyć termin](https://proximalegal.pl/baza-wiedzy/30-dni-na-wniosek-o-upadlosc/): Od kiedy liczyć 30 dni na wniosek o upadłość spółki: 2 przesłanki niewypłacalności, domniemania 3 i 24 miesięcy oraz skutki spóźnienia dla zarządu.
+- [Pięć błędów w umowach B2B, które drogo kosztują](https://proximalegal.pl/baza-wiedzy/bledy-w-umowach-b2b/): Kary umowne bez limitu, brak limitu odpowiedzialności, wadliwe klauzule IP, terminy płatności i wypowiedzenie. 5 błędów w umowach B2B i jak je naprawić.
+- [Due diligence od strony sprzedającego](https://proximalegal.pl/baza-wiedzy/due-diligence-od-strony-sprzedajacego/): Due diligence od strony sprzedającego: vendor DD, data room, lista dokumentów, disclosure letter, oświadczenia i zapewnienia oraz polisa W&I przy sprzedaży.
+- [Jak założyć spółkę z o.o. w 2026 roku, krok po kroku](https://proximalegal.pl/baza-wiedzy/jak-zalozyc-spolke-z-oo/): Jak założyć spółkę z o.o. w 2026 roku: S24 czy notariusz, kapitał 5000 zł, wpis do KRS, kody PKD 2025, CRBR, NIP, VAT-R i ZUS krok po kroku.
+- [Kiedy przekształcić JDG w spółkę. Pięć sygnałów](https://proximalegal.pl/baza-wiedzy/kiedy-przeksztalcic-jdg-w-spolke/): Kiedy przekształcić JDG w spółkę z o.o.: 5 sygnałów, limit zwolnienia z VAT 240 000 zł w 2026 r. i przekształcenie z art. 584(1)-584(13) KSH krok po kroku.
+- [NDA: kiedy chroni, a kiedy jest tylko papierem](https://proximalegal.pl/baza-wiedzy/nda-kiedy-chroni/): Kiedy NDA chroni: definicja informacji poufnych, wyłączenia, czas trwania, kara umowna bez dowodu szkody, tajemnica przedsiębiorstwa i właściwy sąd.
+- [Odpowiedzialność zarządu za długi spółki. Art. 299 KSH w praktyce](https://proximalegal.pl/baza-wiedzy/odpowiedzialnosc-zarzadu-art-299-ksh/): Kiedy członek zarządu sp. z o.o. odpowiada za długi spółki z art. 299 KSH, jak się skutecznie bronić i od kiedy liczyć 30 dni na wniosek o upadłość.
+- [Restrukturyzacja czy upadłość? Jak wybrać, póki jest wybór](https://proximalegal.pl/baza-wiedzy/restrukturyzacja-czy-upadlosc/): Restrukturyzacja czy upadłość spółki? PZU, przyspieszone postępowanie układowe, postępowanie układowe, sanacja i upadłość porównane w jednej tabeli.
+- [Spółka z o.o. czy prosta spółka akcyjna dla startupu](https://proximalegal.pl/baza-wiedzy/spolka-z-oo-czy-psa/): Spółka z o.o. czy prosta spółka akcyjna dla startupu: kapitał od 1 zł, akcje za pracę, rejestr akcjonariuszy, emisja akcji i test wypłacalności w tabeli.
+- [Term sheet bez tajemnic. Zapisy, które kosztują founderów najwięcej](https://proximalegal.pl/baza-wiedzy/term-sheet-bez-tajemnic/): Liquidation preference, anti-dilution, vesting, leaver, weto, drag-along i ESOP w term sheecie na przykładach w zł. Co oznaczają dla foundera sp. z o.o. i PSA.
+- [Umowa o pracę, B2B czy zlecenie. Co ryzykujesz](https://proximalegal.pl/baza-wiedzy/umowa-o-prace-b2b-czy-zlecenie/): Umowa o pracę, B2B czy zlecenie: kiedy ZUS, sąd i od 2026 r. inspektor pracy uznają umowę za etat, jakie są skutki i jak ograniczyć ryzyko przekwalifikowania.
+
+## Opracowania prawne (język prawniczy)
+- [Kara umowna a odszkodowanie (art. 483-485 k.c.)](https://proximalegal.pl/legal/kara-umowna-a-odszkodowanie/): Kara umowna jest zastrzeżonym w umowie surogatem odszkodowania za niewykonanie lub nienależyte wykonanie zobowiązania niepieniężnego i należy się w umówionej wysokości bez względu na wysokość szkody, także wtedy, gdy wierzyciel szkody nie poniósł. Odszkodowanie przenoszące wysokość kary wymaga wyraźnego postanowienia umowy, chyba że szkoda została wyrządzona umyślnie. Ochronę dłużnika zapewnia bezwzględnie obowiązujące miarkowanie kary (art. 484 § 2 k.c.).
+- [Odsetki i rekompensata w transakcjach handlowych](https://proximalegal.pl/legal/odsetki-i-rekompensata-w-transakcjach-handlowych/): Wierzycielowi w transakcji handlowej, który spełnił świadczenie i nie otrzymał zapłaty w terminie, przysługują bez wezwania odsetki ustawowe za opóźnienie w transakcjach handlowych, równe stopie referencyjnej NBP powiększonej o 10 punktów procentowych, oraz ryczałtowa rekompensata za koszty odzyskiwania należności. Ustawa ogranicza swobodę kształtowania terminów zapłaty, a postanowienia wyłączające te uprawnienia są nieważne. Szkodę przewyższającą odsetki wierzyciel może dochodzić na zasadach ogólnych w razie zwłoki dłużnika (art. 481 § 3 k.c.).
+- [Przedawnienie roszczeń odszkodowawczych w obrocie profesjonalnym](https://proximalegal.pl/legal/przedawnienie-roszczen-odszkodowawczych/): Roszczenie odszkodowawcze przedsiębiorcy związane z prowadzoną działalnością przedawnia się z upływem 3 lat, a koniec terminu przypada na ostatni dzień roku kalendarzowego. Przy szkodzie deliktowej bieg terminu zależy od dowiedzenia się o szkodzie i osobie zobowiązanej, z granicą 10 lat od zdarzenia. Od 30 czerwca 2022 r. wniosek o zawezwanie do próby ugodowej zawiesza bieg przedawnienia na czas postępowania pojednawczego, zamiast otwierać nowy termin.
+- [Umowne ograniczenie i wyłączenie odpowiedzialności (art. 473 k.c.)](https://proximalegal.pl/legal/umowne-ograniczenie-odpowiedzialnosci/): Reżim odpowiedzialności kontraktowej ma co do zasady charakter dyspozytywny: strony mogą odpowiedzialność dłużnika rozszerzyć na oznaczone okoliczności (art. 473 § 1 k.c.), a także ograniczyć ją kwotowo, co do postaci szkody lub co do podstaw odpowiedzialności. Bezwzględną granicą jest nieważność zastrzeżenia zwalniającego dłużnika od odpowiedzialności za szkodę wyrządzoną umyślnie (art. 473 § 2 k.c.). Skuteczność klauzuli zależy ponadto od jej precyzji, relacji do roszczeń deliktowych (art. 443 k.c.) i ograniczeń dotyczących postanowień nieuzgodnionych indywidualnie.
+- [Utracona korzyść (lucrum cessans) w obrocie gospodarczym](https://proximalegal.pl/legal/utracona-korzysc/): Utracona korzyść jest postacią szkody majątkowej równorzędną ze stratą rzeczywistą i podlega naprawieniu w granicach normalnych następstw zdarzenia szkodzącego (art. 361 k.c.). Ze względu na hipotetyczny charakter wymaga wykazania z wysokim prawdopodobieństwem, że korzyść zostałaby osiągnięta, a szkoda ewentualna, polegająca na utracie samej szansy, co do zasady nie jest kompensowana. Strony mogą umownie wyłączyć lub ograniczyć odpowiedzialność za lucrum cessans, lecz zastrzeżenie wyłączające odpowiedzialność za szkodę wyrządzoną umyślnie jest nieważne (art. 473 § 2 k.c.).
+
+## Kancelaria
+- [O nas](https://proximalegal.pl/o-nas/): założycielka Kinga Adamus, prawo gospodarcze i transakcje M&A; sieć partnerów (doradca restrukturyzacyjny, podatkowy, księgowość, prawo pracy, notariusz).
+- [FAQ](https://proximalegal.pl/faq/)
+- [Kontakt](https://proximalegal.pl/kontakt/): kontakt@proximalegal.pl
+
+## Optional
+- [Polityka prywatności](https://proximalegal.pl/legal/polityka-prywatnosci/)
+- [Polityka cookies](https://proximalegal.pl/legal/polityka-cookies/)
+- [Regulamin strony internetowej](https://proximalegal.pl/legal/regulamin/)
+- [Nota prawna](https://proximalegal.pl/legal/nota-prawna/)

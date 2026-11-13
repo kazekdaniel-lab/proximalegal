@@ -8,3 +8,4 @@ dist/
 # surowe zrzuty starej strony (kod cudzego bundla i duplikaty zdjęć z src/assets)
 docs/zrodlo/bundle-dane-fragment.js
 docs/zrodlo/zdjecia/
+dist-pages/

@@ -60,7 +60,9 @@ const contactLd = {
           <span><strong>Sprawa pilna: spółka traci płynność</strong><span>Oddzwaniamy tego samego dnia roboczego.</span></span>
         </label>
         <p class="form__consent">Dane z formularza wykorzystamy tylko po to, żeby odpowiedzieć na wiadomość. Zasady opisuje <a class="link" href="/legal/polityka-prywatnosci/">polityka prywatności</a>.</p>
-        <button class="btn btn--primary" type="submit">Wyślij</button>
+        {import.meta.env.PUBLIC_PREVIEW === '1'
+          ? <><button class="btn btn--primary" type="submit" disabled>Wyślij</button><p class="form__consent">W wersji podglądowej formularz nie wysyła wiadomości.</p></>
+          : <button class="btn btn--primary" type="submit">Wyślij</button>}
       </form>
 
       <div>

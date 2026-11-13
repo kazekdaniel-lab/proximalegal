@@ -68,6 +68,8 @@ p { text-wrap: pretty; }
 :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
 .on-dark :focus-visible, .dark :focus-visible { outline-color: var(--mint); }
 
+.preview-bar { background: var(--peach); color: var(--peach-ink); font-size: .875rem; font-weight: 600; text-align: center; padding: 8px 16px; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
 .skip-link {
   position: absolute; left: 16px; top: -100px; z-index: 100;
   background: var(--mint); color: var(--ink); padding: 12px 16px; border-radius: var(--r-ctl);

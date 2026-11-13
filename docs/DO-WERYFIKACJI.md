@@ -1,6 +1,6 @@
 # Do weryfikacji przed publikacją
 
-Wygenerowano: 2026-11-12 skryptem `scripts/verify-report.mjs`. Nie edytuj ręcznie, popraw źródło i uruchom skrypt ponownie.
+Wygenerowano: 2026-11-13 skryptem `scripts/verify-report.mjs`. Nie edytuj ręcznie, popraw źródło i uruchom skrypt ponownie.
 
 Każdy tekst merytoryczny napisano na podstawie aktualnych tekstów jednolitych ustaw (API Sejmu). Przed publikacją prawnik prowadzący musi przeczytać tekst i odhaczyć punkty poniżej.
 Punktów do sprawdzenia: 153.

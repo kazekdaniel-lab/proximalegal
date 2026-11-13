@@ -5,9 +5,14 @@ import rehypePlaceholders from './src/lib/rehype-placeholders.mjs';
 import polishTypography from './src/lib/polish-typography.mjs';
 
 const SITE = 'https://proximalegal.pl';
+// PUBLIC_PREVIEW=1: wersja robocza na GitHub Pages (kazekdaniel-lab.github.io/proximalegal/),
+// z blokadą indeksowania, paskiem "podgląd" i wyłączonym formularzem. Buduje do dist-pages/.
+const PREVIEW = process.env.PUBLIC_PREVIEW === '1';
 
 export default defineConfig({
-  site: SITE,
+  site: PREVIEW ? 'https://kazekdaniel-lab.github.io' : SITE,
+  base: PREVIEW ? '/proximalegal' : undefined,
+  outDir: PREVIEW ? './dist-pages' : './dist',
   trailingSlash: 'always',
   compressHTML: true,
   build: {
@@ -39,7 +44,7 @@ export default defineConfig({
   },
   integrations: [
     polishTypography(),
-    sitemap({
+    ...(PREVIEW ? [] : [sitemap({
       filter: (page) => !page.includes('/kontakt/dziekujemy/'),
       serialize(item) {
         const u = item.url.replace(SITE, '');
@@ -51,6 +56,6 @@ export default defineConfig({
         item.lastmod = new Date().toISOString();
         return item;
       },
-    }),
+    })]),
   ],
 });

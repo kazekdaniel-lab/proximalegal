@@ -11,7 +11,9 @@
     "build": "rm -rf .astro node_modules/.astro && astro build && node scripts/check-dist.mjs && node scripts/verify-report.mjs",
     "preview": "astro preview",
     "og": "node scripts/generate-og.mjs",
-    "check:dashes": "node scripts/check-dashes.mjs"
+    "check:dashes": "node scripts/check-dashes.mjs",
+    "pages:build": "node scripts/build-pages.mjs",
+    "pages:deploy": "node scripts/build-pages.mjs && sh scripts/deploy-pages.sh"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

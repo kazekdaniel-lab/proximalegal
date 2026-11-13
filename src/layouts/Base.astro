@@ -36,6 +36,9 @@ const props = Astro.props;
   </head>
   <body>
     <a class="skip-link" href="#tresc">Przejdź do treści</a>
+    {import.meta.env.PUBLIC_PREVIEW === '1' && (
+      <div class="preview-bar" role="note">Podgląd roboczy nowej strony Proxima Legal. Treści przed weryfikacją, formularz kontaktowy wyłączony.</div>
+    )}
     <Header />
     <main id="tresc" tabindex="-1">
       <slot />

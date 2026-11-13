@@ -130,7 +130,7 @@ const graph = { '@context': 'https://schema.org', '@graph': [org, person, websit
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+<meta name="robots" content={noindex || import.meta.env.PUBLIC_PREVIEW === '1' ? 'noindex, follow' : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
 <meta property="og:type" content={type} />
 <meta property="og:locale" content="pl_PL" />
 <meta property="og:site_name" content="Proxima Legal" />

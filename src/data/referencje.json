@@ -1,0 +1,8 @@
+{
+  "_opis": "Referencje na stronie głównej. Treść wpisuj 1:1 z listu albo maila klienta, bez redakcji. null = na stronie widać znacznik do uzupełnienia. list = ścieżka do skanu PDF w public/referencje/ (opcjonalnie).",
+  "referencje": [
+    { "firma": "Synthagen", "branza": "suplementy diety, sprzedaż D2C", "tresc": null, "autor": null, "stanowisko": null, "list": null },
+    { "firma": "pieseu", "branza": "personalizowane suplementy dla psów", "tresc": null, "autor": null, "stanowisko": null, "list": null },
+    { "firma": "Invette", "branza": "agencja marketingowa", "tresc": null, "autor": null, "stanowisko": null, "list": null }
+  ]
+}

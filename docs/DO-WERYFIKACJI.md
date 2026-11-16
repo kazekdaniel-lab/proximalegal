@@ -3,7 +3,7 @@
 Wygenerowano: 2026-11-16 skryptem `scripts/verify-report.mjs`. Nie edytuj ręcznie, popraw źródło i uruchom skrypt ponownie.
 
 Każdy tekst merytoryczny napisano na podstawie aktualnych tekstów jednolitych ustaw (API Sejmu). Przed publikacją prawnik prowadzący musi przeczytać tekst i odhaczyć punkty poniżej.
-Punktów do sprawdzenia: 156.
+Punktów do sprawdzenia: 162.
 
 
 ## Dane kancelarii (src/data/kancelaria.json)
@@ -20,6 +20,17 @@ Wpisz brakujące wartości w jednym pliku. Strona, stopka, dokumenty i dane dla 
 - [ ] `tytulZawodowy`: tytuł zawodowy: "adwokat" albo "radca prawny"
 - [ ] `numerWpisu`: numer wpisu na listę adwokatów albo radców prawnych
 - [ ] `inspektorOchronyDanych`: inspektor ochrony danych: adres e-mail albo "nie"
+
+## Referencje (src/data/referencje.json)
+
+Treść 1:1 z listu albo maila klienta. Przed publikacją potrzebna zgoda klienta na nazwę firmy, imię i nazwisko. Pustą referencję usuń z pliku, zamiast zostawiać znacznik.
+
+- [ ] Synthagen: tresc, autor, stanowisko
+- [ ] pieseu: tresc, autor, stanowisko
+- [ ] Invette: tresc, autor, stanowisko
+- [ ] Synthagen: potwierdzić opis branży ("suplementy diety, sprzedaż D2C") i zgodę na publikację
+- [ ] pieseu: potwierdzić opis branży ("personalizowane suplementy dla psów") i zgodę na publikację
+- [ ] Invette: potwierdzić opis branży ("agencja marketingowa") i zgodę na publikację
 
 ## Dane spoza kolekcji
 

@@ -533,6 +533,19 @@ img.img-top { object-position: 50% 5%; }
 .card__meta { margin-top: auto; padding-top: 10px; font-size: .875rem; color: var(--text-muted); display: flex; justify-content: space-between; gap: 12px; }
 .card:hover .card__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
 
+/* 15b. Referencje (strona główna) ------------------------------------------------------------------ */
+.refs { display: grid; gap: 20px; }
+@media (min-width: 900px) { .refs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.refs > li { display: flex; }
+.ref { display: flex; flex-direction: column; gap: 22px; width: 100%; margin: 0; padding: 28px 28px 24px; border-radius: var(--r-panel); background: var(--ink-raised); border: 1px solid var(--rule-dark); }
+.ref__brand { font-family: var(--serif); font-size: 1.5rem; font-weight: 560; line-height: 1.1; color: var(--on-dark); }
+.ref__industry { margin-top: 4px; font-size: .875rem; color: var(--on-dark-muted); }
+.ref__quote { position: relative; margin: 0; padding-top: 30px; font-family: var(--serif); font-size: 1.1875rem; line-height: 1.45; }
+.ref__quote::before { content: '\201D' / ''; position: absolute; top: -4px; left: -2px; font-family: var(--serif); font-size: 3.25rem; line-height: 1; color: var(--mint); }
+.ref figcaption { display: grid; gap: 2px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--rule-dark); font-size: .9375rem; }
+.ref figcaption > span { color: var(--on-dark-muted); }
+.ref__letter { margin-top: 10px; justify-self: start; }
+
 /* 16. Zajawka /legal (strona komentarza) ----------------------------------------------------------- */
 .legal-teaser { display: grid; gap: 48px; }
 @media (min-width: 1000px) { .legal-teaser { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: start; } }

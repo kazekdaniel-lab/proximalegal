@@ -27,6 +27,14 @@ missing.forEach((m) => out.push(`- [ ] \`${m.key}\`: ${m.label}`));
 if (!missing.length) out.push('- komplet');
 out.push('');
 let total = missing.length;
+const refsData = JSON.parse(readFileSync(join(ROOT, 'src/data/referencje.json'), 'utf8')).referencje;
+const refsTodo = refsData.filter((r) => !r.tresc || !r.autor || !r.stanowisko);
+out.push('## Referencje (src/data/referencje.json)', '');
+out.push('Treść 1:1 z listu albo maila klienta. Przed publikacją potrzebna zgoda klienta na nazwę firmy, imię i nazwisko. Pustą referencję usuń z pliku, zamiast zostawiać znacznik.', '');
+refsTodo.forEach((r) => out.push(`- [ ] ${r.firma}: ${['tresc', 'autor', 'stanowisko'].filter((k) => !r[k]).join(', ')}`));
+refsData.forEach((r) => out.push(`- [ ] ${r.firma}: potwierdzić opis branży ("${r.branza}") i zgodę na publikację`));
+out.push('');
+total += refsTodo.length + refsData.length;
 // Treści spoza kolekcji (dane w src/data), które wymagają potwierdzenia
 const extra = [
   ['Specjalizacja: Negocjacje', '/specjalizacje/negocjacje/', 'src/data/specializations.ts', [

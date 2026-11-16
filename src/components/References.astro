@@ -1,0 +1,34 @@
+---
+// Referencje klientów. Dane: src/data/referencje.json (treść 1:1 od klienta, null = znacznik do uzupełnienia).
+// Bez danych strukturalnych Review: Google nie pokazuje opinii wystawionych sobie przez firmę na własnej stronie.
+import data from '../data/referencje.json';
+const refs = data.referencje;
+---
+<section class="section dark" aria-labelledby="refs-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="kicker mt-0">Referencje</p>
+      <h2 id="refs-title" class="h2">Co mówią klienci</h2>
+    </div>
+    <ul class="refs" role="list">
+      {refs.map((r) => (
+        <li>
+          <figure class="ref">
+            <div>
+              <p class="ref__brand">{r.firma}</p>
+              <p class="ref__industry">{r.branza}</p>
+            </div>
+            <blockquote class="ref__quote">
+              {r.tresc ? <p>{r.tresc}</p> : <p><span class="placeholder">Treść referencji do uzupełnienia</span></p>}
+            </blockquote>
+            <figcaption>
+              {r.autor ? <strong>{r.autor}</strong> : <strong><span class="placeholder">imię i nazwisko</span></strong>}
+              {r.stanowisko ? <span>{r.stanowisko}, {r.firma}</span> : <span><span class="placeholder">stanowisko</span>, {r.firma}</span>}
+              {r.list && <a class="link ref__letter" href={r.list}>List referencyjny (PDF)</a>}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

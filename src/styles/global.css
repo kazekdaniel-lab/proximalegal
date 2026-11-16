@@ -487,7 +487,7 @@ p { text-wrap: pretty; }
 /* 13. Osoba prowadząca ---------------------------------------------------------------------- */
 .person { display: grid; gap: 40px; align-items: center; }
 @media (min-width: 900px) { .person { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; } }
-.person__photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-panel); }
+.person__photo img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 6%; border-radius: var(--r-panel); }
 .person__name { margin-bottom: 18px; }
 .meta-list { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; font-size: .9375rem; margin: 0 0 24px; }
 .meta-list dt { color: var(--text-muted); }

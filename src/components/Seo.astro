@@ -34,7 +34,7 @@ const base = site.url;
 const canonical = new URL(Astro.url.pathname, base).toString();
 const fullTitle = title.includes('Proxima Legal') || title.length > 48 ? title : `${title} | Proxima Legal`;
 const ogImage = new URL(image, base).toString();
-const kinga = await getImage({ src: kingaImg, width: 800, format: 'jpg' });
+const kinga = await getImage({ src: kingaImg, width: 704, format: 'jpg' });
 
 const ORG = `${base}/#kancelaria`;
 const PERSON = `${base}/o-nas/#kinga-adamus`;

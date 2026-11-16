@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { site } from '../../data/site';
-import office from '../../assets/img/biuro-warszawa.jpg';
+import office from '../../assets/img/kinga-adamus-biurko-jasne.jpg';
 
 const crumbs = [{ name: 'Kontakt', href: '/kontakt/' }];
 const contactLd = {
@@ -72,7 +72,7 @@ const contactLd = {
           <div><dt>Biuro</dt><dd>{site.address.street ? `${site.address.street}, ${site.address.postalCode} Warszawa` : 'Warszawa'}</dd></div>
           <div><dt>Czas odpowiedzi</dt><dd>1 dzień roboczy</dd></div>
         </dl>
-        <Image src={office} alt="Biuro Proxima Legal w Warszawie" widths={[480, 720]} sizes="(min-width: 1000px) 35vw, 100vw" format="webp" loading="lazy" class="contact-photo" />
+        <Image src={office} alt="Kinga Adamus, założycielka Proxima Legal, przy biurku" widths={[480, 633]} sizes="(min-width: 1000px) 35vw, 100vw" format="webp" loading="lazy" class="contact-photo" />
         <p class="mt-s small muted">Z klientami spoza Warszawy pracujemy zdalnie. Spotkania na miejscu umawiamy według potrzeb.</p>
       </div>
     </div>

@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import office from '../assets/img/biuro-warszawa.jpg';
+import office from '../assets/img/kinga-adamus-biurko-jasne.jpg';
 interface Props { variant?: 'default' | 'rescue'; title?: string; text?: string; image?: ImageMetadata; imageAlt?: string }
 const {
   variant = 'default',
@@ -9,7 +9,7 @@ const {
     ? 'Zadzwoń albo napisz. Rozmowa jest poufna i nie zobowiązuje do współpracy.'
     : 'Pierwsza rozmowa trwa 30 minut i jest bezpłatna. Opisz, z czym przychodzisz. Odpowiadamy w ciągu jednego dnia roboczego.',
   image = office,
-  imageAlt = 'Kinga Adamus przy biurku w biurze Proxima Legal w Warszawie',
+  imageAlt = 'Kinga Adamus, założycielka Proxima Legal, przy biurku',
 } = Astro.props;
 ---
 <section class:list={['cta-band dark', { 'cta-band--rescue': variant === 'rescue' }]} aria-labelledby="cta-title">
@@ -30,7 +30,7 @@ const {
     </div>
     {variant === 'default' && (
       <div class="cta-band__media">
-        <Image src={image} alt={imageAlt} widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="lazy" />
+        <Image src={image} alt={imageAlt} widths={[480, 633]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="lazy" />
       </div>
     )}
   </div>

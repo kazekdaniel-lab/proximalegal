@@ -13,7 +13,6 @@ import { firstParagraphs } from '../lib/text';
 import { formatPrice } from '../data/site';
 import kinga from '../assets/img/kinga-adamus-zespol.jpg';
 import heroImg from '../assets/img/kinga-adamus-hero.jpg';
-import ctaImg from '../assets/img/kinga-adamus-dokumenty.jpg';
 
 const bw = await getCollection('baza-wiedzy');
 const featured = ['odpowiedzialnosc-zarzadu-art-299-ksh', 'jak-zalozyc-spolke-z-oo', 'bledy-w-umowach-b2b']
@@ -234,5 +233,5 @@ const faqHome = {
     </section>
   )}
 
-  <CtaBand image={ctaImg} imageAlt="Kinga Adamus czyta umowę przy biurku" />
+  <CtaBand />
 </Base>

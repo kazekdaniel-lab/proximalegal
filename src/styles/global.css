@@ -692,7 +692,7 @@ img.img-top { object-position: 50% 5%; }
 .duo img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--r-panel); }
 .photo-slot { aspect-ratio: 3 / 4; border-radius: var(--r-panel); border: 1px dashed var(--rule-strong); display: grid; place-items: center; text-align: center; padding: 20px; font-size: .875rem; color: var(--text-muted); background: repeating-linear-gradient(135deg, transparent 0 10px, color-mix(in srgb, var(--rule) 45%, transparent) 10px 11px); }
 .duo figcaption { grid-column: 1 / -1; font-size: .875rem; color: var(--text-muted); }
-.duo img.duo__face { object-position: 72% 30%; }
+.duo img.duo__face { object-position: 50% 25%; }
 .duo__note { align-self: end; border-top: 2px solid var(--rust); padding-top: 16px; }
 .duo__note p:last-child { color: var(--text-muted); font-size: .9375rem; margin-top: 8px; }
 

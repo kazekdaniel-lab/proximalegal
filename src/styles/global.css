@@ -489,6 +489,8 @@ p { text-wrap: pretty; }
 @media (min-width: 900px) { .person { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; } }
 .person__photo img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 50% 6%; border-radius: var(--r-panel); }
 .person__name { margin-bottom: 18px; }
+/* kadrowanie zdjęć z twarzą wysoko w kadrze (4:3 z portretu 4:5) */
+img.img-top { object-position: 50% 5%; }
 .meta-list { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; font-size: .9375rem; margin: 0 0 24px; }
 .meta-list dt { color: var(--text-muted); }
 .meta-list dd { margin: 0; }
@@ -722,7 +724,8 @@ p { text-wrap: pretty; }
 .pill-list a, .pill-list span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--rule-strong); text-decoration: none; font-size: .9375rem; font-weight: 500; }
 .pill-list a:hover { border-color: var(--teal); color: var(--teal); }
 .other-specs { list-style: none; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
-@media (min-width: 800px) { .other-specs { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 24px; border-top: 0; } }
+@media (min-width: 800px) { .other-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; border-top: 0; } }
+@media (min-width: 1100px) { .other-specs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .other-specs a { display: grid; gap: 2px; padding: 18px 0; border-bottom: 1px solid var(--rule); text-decoration: none; }
 @media (min-width: 800px) { .other-specs a { border-top: 2px solid var(--text); border-bottom: 0; } }
 .other-specs span { font-size: .875rem; color: var(--text-muted); }

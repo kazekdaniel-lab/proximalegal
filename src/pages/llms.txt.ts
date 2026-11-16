@@ -18,7 +18,7 @@ export async function GET() {
     '',
     `> ${site.description}`,
     '',
-    'Kancelaria prowadzi spółki przez cztery etapy: start i rejestracja, finansowanie i M&A, bieżąca obsługa oraz kryzys i restrukturyzacja. Pracuje w Warszawie i online. Pierwsza konsultacja trwa 30 minut i jest bezpłatna. Odpowiedź w abonamencie: 1 dzień roboczy.',
+    'Kancelaria prowadzi spółki przez cztery etapy: start i rejestracja, finansowanie i M&A, bieżąca obsługa oraz kryzys i restrukturyzacja. Na każdym etapie pomaga też w negocjacjach (doradca negocjacyjny Bogumił Wróbel razem z prawnikiem). Pracuje w Warszawie i online. Pierwsza konsultacja trwa 30 minut i jest bezpłatna. Odpowiedź w abonamencie: 1 dzień roboczy.',
     '',
     '## Oferta',
     `- [Abonament prawny](${u('/abonament-prawny/')}): stały prawnik, ryczałt miesięczny z pulą godzin, 4 pakiety (Legal Starter, Legal + Finanse, Legal + Strategia, All-in-One), wycena po konsultacji.`,

@@ -136,6 +136,7 @@ export const workflow = [
 
 export const partners = [
   { role: 'Doradca strategiczny', d: 'Cele, model biznesowy, ryzyko inwestycyjne.', name: null as string | null },
+  { role: 'Doradca negocjacyjny', d: 'Przygotowanie i prowadzenie negocjacji z inwestorami, kontrahentami i wierzycielami.', name: 'Bogumił Wróbel' as string | null },
   { role: 'Licencjonowany doradca restrukturyzacyjny', d: 'Diagnoza niewypłacalności, układy z wierzycielami, funkcja nadzorcy.', name: null as string | null },
   { role: 'Biuro rachunkowe', d: 'Pełna księgowość, VAT, CIT, ZUS, sprawozdania i JPK.', name: null as string | null },
   { role: 'Doradca podatkowy', d: 'Interpretacje, kontrole, podatki przy transakcjach.', name: null as string | null },

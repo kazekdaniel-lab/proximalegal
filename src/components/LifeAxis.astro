@@ -14,7 +14,7 @@ const days = Array.from({ length: 30 }, (_, i) => i + 1);
   )}
   {!caption && <span id="axis-label" class="visually-hidden">Etapy życia spółki</span>}
   <ol class="axis__list" role="list">
-    {specializations.map((s) => (
+    {specializations.filter((s) => !s.cross).map((s) => (
       <li class:list={['axis__seg', { 'axis__seg--rescue': s.tone === 'rescue' }]}>
         <a href={`/specjalizacje/${s.slug}/`}>
           {s.tone === 'rescue'

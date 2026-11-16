@@ -3,7 +3,7 @@
 Wygenerowano: 2026-11-16 skryptem `scripts/verify-report.mjs`. Nie edytuj ręcznie, popraw źródło i uruchom skrypt ponownie.
 
 Każdy tekst merytoryczny napisano na podstawie aktualnych tekstów jednolitych ustaw (API Sejmu). Przed publikacją prawnik prowadzący musi przeczytać tekst i odhaczyć punkty poniżej.
-Punktów do sprawdzenia: 153.
+Punktów do sprawdzenia: 156.
 
 
 ## Dane kancelarii (src/data/kancelaria.json)
@@ -20,6 +20,16 @@ Wpisz brakujące wartości w jednym pliku. Strona, stopka, dokumenty i dane dla 
 - [ ] `tytulZawodowy`: tytuł zawodowy: "adwokat" albo "radca prawny"
 - [ ] `numerWpisu`: numer wpisu na listę adwokatów albo radców prawnych
 - [ ] `inspektorOchronyDanych`: inspektor ochrony danych: adres e-mail albo "nie"
+
+## Dane spoza kolekcji
+
+### Specjalizacja: Negocjacje
+
+Adres: `/specjalizacje/negocjacje/`  Plik: `src/data/specializations.ts`
+
+- [ ] Bogumił Wróbel: potwierdzić rolę ("doradca negocjacyjny") i opis z sekcji "Kto prowadzi negocjacje" (źródło: publiczny profil LinkedIn).
+- [ ] Bogumił Wróbel: zgoda na publikację imienia, nazwiska i zdjęcia; zdjęcie jest robocze, do wymiany na docelowe.
+- [ ] Model współpracy: czy negocjacje są w abonamencie i Legal Rescue (tak wskazuje strona) czy wyceniane osobno.
 
 ## Baza wiedzy
 

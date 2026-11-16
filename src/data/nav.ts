@@ -8,6 +8,7 @@ export const mainNav: (NavGroup | NavItem)[] = [
       { label: 'Abonament prawny', href: '/abonament-prawny/', note: 'Stały prawnik, ryczałt i cztery pakiety' },
       { label: 'Legal Rescue', href: '/legal-rescue/', note: 'Spółka traci płynność. 30 dni na decyzję', tone: 'rescue' },
       { label: 'Doradztwo strategiczne', href: '/doradztwo-strategiczne/', note: 'Sesja 90 minut albo stała współpraca' },
+      { label: 'Negocjacje', href: '/specjalizacje/negocjacje/', note: 'Doradca negocjacyjny i prawnik przy jednym stole' },
     ],
   },
   {
@@ -18,6 +19,7 @@ export const mainNav: (NavGroup | NavItem)[] = [
       { label: 'Finansowanie i M&A', href: '/specjalizacje/finansowanie-i-ma/', note: '02 Wzrost' },
       { label: 'Bieżąca obsługa', href: '/specjalizacje/biezaca-obsluga/', note: '03 Codzienna praca' },
       { label: 'Kryzys i restrukturyzacja', href: '/specjalizacje/kryzys-i-restrukturyzacja/', note: '04 Trudne decyzje' },
+      { label: 'Negocjacje', href: '/specjalizacje/negocjacje/', note: '05 Na każdym etapie' },
     ],
   },
   { label: 'O nas', href: '/o-nas/' },
@@ -39,6 +41,7 @@ export const footerNav: NavGroup[] = [
       { label: 'Abonament prawny', href: '/abonament-prawny/' },
       { label: 'Legal Rescue', href: '/legal-rescue/' },
       { label: 'Doradztwo strategiczne', href: '/doradztwo-strategiczne/' },
+      { label: 'Negocjacje', href: '/specjalizacje/negocjacje/' },
     ],
   },
   {
@@ -48,6 +51,7 @@ export const footerNav: NavGroup[] = [
       { label: 'Finansowanie i M&A', href: '/specjalizacje/finansowanie-i-ma/' },
       { label: 'Bieżąca obsługa', href: '/specjalizacje/biezaca-obsluga/' },
       { label: 'Kryzys i restrukturyzacja', href: '/specjalizacje/kryzys-i-restrukturyzacja/' },
+      { label: 'Negocjacje', href: '/specjalizacje/negocjacje/' },
     ],
   },
   {

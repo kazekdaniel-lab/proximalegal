@@ -2,6 +2,8 @@ import start from '../assets/img/specjalizacja-start.jpg';
 import finansowanie from '../assets/img/specjalizacja-finansowanie.jpg';
 import obsluga from '../assets/img/specjalizacja-obsluga.jpg';
 import kryzys from '../assets/img/specjalizacja-kryzys.jpg';
+import negocjacje from '../assets/img/bogumil-wrobel-negocjacje.jpg';
+import bogumil from '../assets/img/bogumil-wrobel-portret.jpg';
 
 export type Specialization = {
   slug: string;
@@ -22,6 +24,12 @@ export type Specialization = {
   imageAlt: string;
   primaryCta: { label: string; href: string };
   tone?: 'rescue';
+  /** true = obszar przekrojowy, poza osią życia spółki (LifeAxis) */
+  cross?: boolean;
+  /** klasa kadrowania zdjęcia w wąskich formatach (4:3), np. 'img-top' */
+  imageClass?: string;
+  /** osoba prowadząca obszar, pokazywana na podstronie specjalizacji */
+  expert?: { name: string; role: string; bio: string[]; photo: ImageMetadata; photoAlt: string };
 };
 
 export const specializations: Specialization[] = [
@@ -150,6 +158,50 @@ export const specializations: Specialization[] = [
     imageAlt: 'Wydruk wykresu spadku, kalkulator i okulary na ciemnym biurku',
     primaryCta: { label: 'Zobacz Legal Rescue', href: '/legal-rescue/' },
     tone: 'rescue',
+  },
+  {
+    slug: 'negocjacje',
+    no: '05',
+    stage: 'Na każdym etapie',
+    title: 'Negocjacje',
+    short: 'Inwestor, kontrahent, wspólnik albo bank. Rozmowy, w których stawka jest wysoka, prowadzone z planem.',
+    hero: 'Dobra umowa zaczyna się od dobrze przygotowanej rozmowy.',
+    lead: 'Do ważnych negocjacji siadasz z doradcą negocjacyjnym i z prawnikiem. Bogumił Wróbel pomaga przygotować strategię i prowadzić rozmowę, a prawnik pilnuje, żeby to, co ustalicie, dało się zapisać w umowie i wyegzekwować.',
+    metaTitle: 'Negocjacje biznesowe: inwestor, kontrahent, wierzyciel',
+    metaDescription: 'Przygotowanie i prowadzenie negocjacji z inwestorami, kontrahentami, wspólnikami i wierzycielami. Doradca negocjacyjny i prawnik przy jednym stole. Warszawa i online.',
+    bullets: ['Strategia przed rozmową', 'Negocjacje z inwestorem i kontrahentem', 'Rozmowy z bankami i wierzycielami', 'Spory wspólników bez sądu'],
+    services: [
+      { t: 'Przygotowanie do rozmowy', d: 'Ustalamy cel, granicę, poniżej której nie schodzisz, i plan na wypadek braku porozumienia. Spisujemy, czego chce druga strona i co możesz jej dać bez straty.' },
+      { t: 'Negocjacje z inwestorem', d: 'Wycena, liquidation preference, vesting, prawa veta. Doradca negocjacyjny prowadzi rozmowę, a prawnik od razu sprawdza, co każde ustępstwo znaczy w term sheecie i umowie wspólników.' },
+      { t: 'Kontrakty z kontrahentami', d: 'Duże kontrakty, limity odpowiedzialności, kary umowne i terminy płatności. Negocjujemy warunki, a potem zapisujemy je tak, żeby nie było sporu o interpretację.' },
+      { t: 'Banki i wierzyciele', d: 'Rozłożenie długu, wstrzymanie egzekucji, zmiana warunków kredytu. W kryzysie rozmowy toczą się pod presją terminu, więc przygotowanie decyduje o wyniku.' },
+      { t: 'Spory wspólników', d: 'Wyjście wspólnika, cena udziałów, podział obowiązków. Rozmowa prowadzona z planem zwykle kończy się szybciej niż proces.' },
+    ],
+    situations: [
+      'Inwestor przysłał term sheet, a Ty nie wiesz, o co walczyć, a co odpuścić.',
+      'Kluczowy klient chce zmienić warunki kontraktu w trakcie współpracy.',
+      'Wspólnik chce odejść i nie możecie się dogadać co do ceny udziałów.',
+    ],
+    packages: [
+      { label: 'Abonament prawny', href: '/abonament-prawny/' },
+      { label: 'Legal Rescue', href: '/legal-rescue/' },
+    ],
+    articles: ['term-sheet-bez-tajemnic', 'bledy-w-umowach-b2b', 'restrukturyzacja-czy-upadlosc'],
+    image: negocjacje,
+    imageAlt: 'Bogumił Wróbel w trakcie rozmowy, zdjęcie czarno-białe',
+    imageClass: 'img-top',
+    primaryCta: { label: 'Bezpłatna konsultacja 30 min', href: '/kontakt/' },
+    cross: true,
+    expert: {
+      name: 'Bogumił Wróbel',
+      role: 'doradca negocjacyjny',
+      bio: [
+        'Pracuje z liderami i przedsiębiorcami nad przygotowaniem i prowadzeniem negocjacji.',
+        'W Proxima Legal dołącza do spraw, w których o wyniku decyduje rozmowa: z inwestorem, kontrahentem, wspólnikiem albo wierzycielem.',
+      ],
+      photo: bogumil,
+      photoAlt: 'Bogumił Wróbel, doradca negocjacyjny',
+    },
   },
 ];
 

@@ -128,7 +128,7 @@ const faqHome = {
         <div class="spec-preview" aria-hidden="true">
           <div class="spec-preview__frame">
             {specializations.map((s, i) => (
-              <Image src={s.image} alt="" widths={[400, 640, 900]} sizes="(min-width: 1000px) 38vw, 1px" format="webp" class={i === 0 ? 'is-active' : ''} data-spec-img={s.slug} loading="lazy" />
+              <Image src={s.image} alt="" widths={[400, 640, 900]} sizes="(min-width: 1000px) 38vw, 1px" format="webp" class:list={[{ 'is-active': i === 0 }, s.imageClass]} data-spec-img={s.slug} loading="lazy" />
             ))}
           </div>
           <p class="spec-preview__caption" data-spec-caption>{specializations[0].imageAlt}</p>

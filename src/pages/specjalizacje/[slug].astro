@@ -34,8 +34,11 @@ const service = {
     itemListElement: s.services.map((x) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: x.t, description: x.d } })),
   },
 };
+const expert = s.expert
+  ? { '@type': 'Person', '@id': `https://proximalegal.pl/specjalizacje/${s.slug}/#ekspert`, name: s.expert.name, jobTitle: s.expert.role, knowsAbout: s.title }
+  : null;
 ---
-<Base title={s.metaTitle} description={s.metaDescription} breadcrumbs={crumbs} jsonLd={[service]}>
+<Base title={s.metaTitle} description={s.metaDescription} breadcrumbs={crumbs} jsonLd={expert ? [service, expert] : [service]}>
   <section class="page-hero dark" aria-labelledby="page-title">
     <div class="container">
       <Breadcrumbs items={crumbs} />
@@ -50,7 +53,7 @@ const service = {
           </div>
         </div>
         <div class="page-hero__media">
-          <Image src={s.image} alt={s.imageAlt} widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="eager" fetchpriority="high" />
+          <Image src={s.image} alt={s.imageAlt} widths={[480, 720, 1000]} sizes="(min-width: 960px) 40vw, 100vw" format="webp" loading="eager" fetchpriority="high" class={s.imageClass} />
         </div>
       </div>
     </div>
@@ -69,6 +72,26 @@ const service = {
       </ul>
     </div>
   </section>
+
+  {s.expert && (
+    <section class="section" aria-labelledby="expert-title">
+      <div class="container person">
+        <div class="person__photo">
+          <Image src={s.expert.photo} alt={s.expert.photoAlt} widths={[400, 640, 767]} sizes="(min-width: 900px) 40vw, 100vw" format="webp" loading="lazy" />
+        </div>
+        <div>
+          <p class="kicker">Kto prowadzi negocjacje</p>
+          <h2 id="expert-title" class="h1 person__name">{s.expert.name}</h2>
+          <dl class="meta-list">
+            <dt>Rola</dt><dd>{s.expert.role}</dd>
+            <dt>Obszar</dt><dd>{s.title.toLowerCase()}</dd>
+          </dl>
+          {s.expert.bio.map((p, i) => <p class:list={[i === 0 ? 'lead' : 'mt-m']}>{p}</p>)}
+          <p class="mt-m"><a class="btn btn--ghost" href="/kontakt/">Umów rozmowę</a></p>
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="section band" aria-labelledby="sit-title">
     <div class="container split">

@@ -27,6 +27,21 @@ missing.forEach((m) => out.push(`- [ ] \`${m.key}\`: ${m.label}`));
 if (!missing.length) out.push('- komplet');
 out.push('');
 let total = missing.length;
+// Treści spoza kolekcji (dane w src/data), które wymagają potwierdzenia
+const extra = [
+  ['Specjalizacja: Negocjacje', '/specjalizacje/negocjacje/', 'src/data/specializations.ts', [
+    'Bogumił Wróbel: potwierdzić rolę ("doradca negocjacyjny") i opis z sekcji "Kto prowadzi negocjacje" (źródło: publiczny profil LinkedIn).',
+    'Bogumił Wróbel: zgoda na publikację imienia, nazwiska i zdjęcia; zdjęcie jest robocze, do wymiany na docelowe.',
+    'Model współpracy: czy negocjacje są w abonamencie i Legal Rescue (tak wskazuje strona) czy wyceniane osobno.',
+  ]],
+];
+out.push('## Dane spoza kolekcji', '');
+for (const [title, url, file, items] of extra) {
+  out.push(`### ${title}`, '', `Adres: \`${url}\`  Plik: \`${file}\``, '');
+  items.forEach((v) => out.push(`- [ ] ${v}`));
+  out.push('');
+  total += items.length;
+}
 for (const [label, dir, base] of sections) {
   out.push(`## ${label}`, '');
   for (const f of readdirSync(join(ROOT, dir)).filter((x) => x.endsWith('.md')).sort()) {
